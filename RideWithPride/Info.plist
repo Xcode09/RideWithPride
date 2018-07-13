@@ -28,12 +28,24 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Luminari.ttf</string>
+	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app uses your loaction</string>
+	<key>NSLocationUsageDescription</key>
+	<string>THis app uses loaction</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app uses Loaction</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>app uses loaction</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

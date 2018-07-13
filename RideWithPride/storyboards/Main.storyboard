@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iCG-LH-vBk">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Page View Controller-->
+        <scene sceneID="kRS-rt-uMd">
+            <objects>
+                <pageViewController storyboardIdentifier="MainID" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="iCG-LH-vBk" customClass="PageViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xIN-Ba-jzW"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PBs-pR-hDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="654" y="-1145"/>
+        </scene>
+        <!--Controller-->
+        <scene sceneID="CzR-4g-t5E">
+            <objects>
+                <viewController storyboardIdentifier="Ridervc" id="Y2b-dE-YJ9" customClass="VRController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E3F-VI-v5y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-aX-HPz">
+                                <rect key="frame" x="16" y="94" width="288" height="69"/>
+                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="50"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xT7-qC-Eqc">
+                                <rect key="frame" x="16" y="432" width="287" height="83"/>
+                                <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="83" id="yuE-iV-ZjX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Rider">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Jfm-bN-dVd" kind="show" id="DG8-gW-N0V"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start your journey  as a Rider" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRd-ct-4lo">
+                                <rect key="frame" x="0.0" y="214" width="320" height="140"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dCB-rL-Efp" firstAttribute="trailing" secondItem="xT7-qC-Eqc" secondAttribute="trailing" constant="17" id="26J-3G-wuI"/>
+                            <constraint firstItem="xT7-qC-Eqc" firstAttribute="leading" secondItem="dCB-rL-Efp" secondAttribute="leading" constant="16" id="9VK-q9-UPc"/>
+                            <constraint firstItem="aeM-aX-HPz" firstAttribute="leading" secondItem="E3F-VI-v5y" secondAttribute="leadingMargin" id="EHK-BD-P25"/>
+                            <constraint firstItem="aeM-aX-HPz" firstAttribute="top" secondItem="dCB-rL-Efp" secondAttribute="top" constant="74" id="Qxn-80-xLc"/>
+                            <constraint firstItem="dCB-rL-Efp" firstAttribute="bottom" secondItem="xT7-qC-Eqc" secondAttribute="bottom" constant="53" id="SwM-k1-cVr"/>
+                            <constraint firstItem="aeM-aX-HPz" firstAttribute="trailing" secondItem="E3F-VI-v5y" secondAttribute="trailingMargin" id="qBE-Qx-PJX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dCB-rL-Efp"/>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="xT7-qC-Eqc" id="vQO-I7-mTL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIY-EM-b9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1376.25" y="-1159.8591549295775"/>
+        </scene>
+        <!--Rider1-->
+        <scene sceneID="qBe-45-lWe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Rider1" id="Jfm-bN-dVd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hs6-Lo-pws" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1357" y="-787"/>
+        </scene>
+        <!--DriverLogin-->
+        <scene sceneID="8b3-ul-U5t">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DriverLogin" id="CR5-IC-n47" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bb1-SU-Lyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3017" y="-1145"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="KZs-1g-1RV">
+            <objects>
+                <viewController storyboardIdentifier="Drivervc" id="k11-93-mWk" customClass="VDViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Jh-vD-4g9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="SWb-sz-JpQ">
+                                <rect key="frame" x="16" y="69" width="288" height="68.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="50"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwI-Ed-zXx">
+                                <rect key="frame" x="14" y="421" width="292" height="83"/>
+                                <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="83" id="jWs-qw-w0d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Driver">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="CR5-IC-n47" kind="show" id="VeG-u4-dHx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Start your journey  as a Driver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-Ex-tbJ">
+                                <rect key="frame" x="0.0" y="190" width="320" height="140"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" id="3MY-Hb-4lS"/>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="trailing" secondItem="pOi-zc-i5c" secondAttribute="trailing" id="4dS-uo-Qcq"/>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="top" secondItem="SWb-sz-JpQ" secondAttribute="bottom" constant="52.5" id="5L0-aZ-8a9"/>
+                            <constraint firstItem="pOi-zc-i5c" firstAttribute="trailing" secondItem="SWb-sz-JpQ" secondAttribute="trailing" constant="16" id="Swc-t2-VQL"/>
+                            <constraint firstItem="pOi-zc-i5c" firstAttribute="bottom" secondItem="mwI-Ed-zXx" secondAttribute="bottom" constant="64" id="Yn3-xK-Sdf"/>
+                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="top" secondItem="pOi-zc-i5c" secondAttribute="top" constant="49" id="iTw-pU-g5z"/>
+                            <constraint firstItem="mwI-Ed-zXx" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="14" id="ntx-2I-DTd"/>
+                            <constraint firstItem="mwI-Ed-zXx" firstAttribute="top" secondItem="VcJ-Ex-tbJ" secondAttribute="bottom" constant="91" id="uTN-W2-VmO"/>
+                            <constraint firstItem="pOi-zc-i5c" firstAttribute="trailing" secondItem="mwI-Ed-zXx" secondAttribute="trailing" constant="14" id="ugz-UM-5ed"/>
+                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="16" id="wha-Ak-1UN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pOi-zc-i5c"/>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="mwI-Ed-zXx" id="40q-XI-bok"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZQ-F3-DW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2203.125" y="-1141.9014084507041"/>
+        </scene>
+    </scenes>
+</document>
