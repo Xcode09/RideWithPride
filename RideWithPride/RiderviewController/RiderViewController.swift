@@ -33,10 +33,6 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     @objc func navigatevc(){
         let vc = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
         self.present(vc, animated: true, completion: nil)
@@ -61,15 +57,16 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
                 }else {
                     self.activity.stopAnimating()
                     self.activity.isHidden = true
-                    self.ClearTextfeild()
+                    ExtraThings.Cleartext(NameField: self.emailtextfield,passwordfiled: self.Passwordtextfield)
                     let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
                     self.present(callaride, animated: true, completion: nil)
                 }
                 
             }
         }else{
-            ErrorAlertShow(Title: "OOPS", Message: "Wrong Email or Password")
+          ErrorAlertShow(Title: "OOPS", Message: "Wrong Email or Password")
             activity.stopAnimating()
+            ExtraThings.Cleartext(NameField: self.emailtextfield,passwordfiled: self.Passwordtextfield)
             activity.isHidden = true
         }
     }
@@ -79,11 +76,6 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
             self.present(vc, animated: true)
         }
     }
-    func ErrorAlertShow(Title:String,Message:String){
-        let alert = UIAlertController(title: Title, message: Message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
@@ -91,6 +83,11 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         login()
         return true
+    }
+    func ErrorAlertShow(Title:String,Message:String){
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 

@@ -43,24 +43,26 @@ class createAccountRiderView: UIViewController {
         guard let text = Nametextfield.text else {return}
         guard let email = Emailtextfield.text else{return}
         guard let pass = Passwordtextfield.text else {return}
-        let emailtrue = isEmailValide(EmailText: email)
-        //let passwordtrue = isPasswordValide(PasswordText: pass)
+        let emailtrue = createAccountRiderView.isEmailValide(EmailText: email, regularExp: EmailRegex)
         if text != "" && emailtrue == true && pass.count >= 8{
             Auth.auth().createUser(withEmail: email, password: pass) { (user, error) in
                 if error != nil{
                     self.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
+                }else{
+                    
+                    self.SaveInDatabase(with: user!, with: text)
+                    ExtraThings.Cleartext(NameField: self.Nametextfield, passwordfiled: self.Emailtextfield,self.Passwordtextfield)
+                    let callaridevc = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
+                    self.present(callaridevc, animated: true, completion: nil)
                 }
-                self.SaveInDatabase(with: user!, with: text)
-                self.Cleartext()
-                let callaridevc = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
-                self.present(callaridevc, animated: true, completion: nil)
+                
                 
             }
         }
         else if emailtrue == false{
             ErrorAlertShow(Title: "Email Wrong", Message: "Please Enter information according to the format in placeholder.")
         }else if pass.count < 8{
-            ErrorAlertShow(Title: "Password Wrong", Message: "password must 8 charaters......")
+           ErrorAlertShow(Title: "Password Wrong", Message: "password must 8 charaters......")
         }else if text == ""{
             ErrorAlertShow(Title: "Name Field Empty", Message: "Please fill your name")
         }else{
@@ -99,19 +101,19 @@ extension createAccountRiderView:UITextFieldDelegate{
     }
 }
 extension createAccountRiderView{
-    fileprivate func isEmailValide(EmailText:String?)->Bool{
+    static func isEmailValide(EmailText:String?,regularExp:String)->Bool{
         guard EmailText != nil else {return false}
-        let regexp = NSPredicate(format: "SELF MATCHES %@",EmailRegex)
+        let regexp = NSPredicate(format: "SELF MATCHES %@",regularExp)
         return regexp.evaluate(with:EmailText)
     }
-    func Cleartext(){
-        Nametextfield.text = ""
-        Emailtextfield.text = ""
-        Passwordtextfield.text = ""
+    func Cleartext(textfield:UITextField...){
+        for text in textfield{
+            text.text = nil
+        }
     }
- func ErrorAlertShow(Title:String,Message:String){
+    func ErrorAlertShow(Title:String,Message:String){
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }

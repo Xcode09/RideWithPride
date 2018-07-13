@@ -7,8 +7,9 @@
 //
 
 import UIKit
-
-class DriverRegister: UIViewController {
+import FirebaseAuth
+import FirebaseDatabase
+class DriverRegister: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var Name: UITextField!
     @IBOutlet weak var CNIC: UITextField!
     @IBOutlet weak var address: UITextField!
@@ -18,9 +19,20 @@ class DriverRegister: UIViewController {
     @IBOutlet weak var lognbtn:UIButton!
     @IBOutlet weak var createbtn:UIButton!
     override func viewDidAppear(_ animated: Bool) {
-        
+      password.delegate = self
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
+            guard let rect = noti.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue else{return}
+            let recte = rect.cgRectValue
+            if noti.name == NSNotification.Name.UIKeyboardWillShow{
+                self.Email.frame.origin.y = -recte.height
+            }
+        }
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
      private let EmailRegex = "\\w+\\d?\\@\\w+\\.com"
+    private let cnicregx = "\\d+"
     override func viewWillAppear(_ animated: Bool) {
         lognbtn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         createbtn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
@@ -30,7 +42,7 @@ class DriverRegister: UIViewController {
         createbtn.layer.contentsScale = 20
     }
     @IBAction func Resigter(_ sender: UIButton) {
-       
+       loginfor()
     }
     
     @IBAction func loginback(_ sender: UIButton) {
@@ -42,23 +54,47 @@ class DriverRegister: UIViewController {
         guard let adre = address.text else{return}
         guard let phone = phoneNO.text else{return}
         guard let Email = Email.text else{return}
-        let emailvalidate = isEmailValide(EmailText: Email)
+        let emailvalidate = createAccountRiderView.isEmailValide(EmailText: Email, regularExp: EmailRegex)
+        let cnincvalidat = createAccountRiderView.isEmailValide(EmailText: cnic, regularExp: cnicregx)
+        let isphone = createAccountRiderView.isEmailValide(EmailText: phone, regularExp: cnicregx)
         guard let pass = password.text else{return}
-        if name != "" && cnic != "" && adre != "" && phone != "" && emailvalidate == true && pass != "" {
+        if name != "" && cnincvalidat == true && adre != "" && isphone == true && emailvalidate == true && pass != "" {
+            Auth.auth().createUser(withEmail: Email, password: pass) { (user, error) in
+                if error != nil{
+                    self.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
+                }else{
+                    self.SaveRegisteration(with: user!, name: name, cnic: cnic, address: adre, phone: phone)
+                }
+            }
+            ErrorAlertShow(Title: "Complete", Message: "Great")
             
+        }else if cnincvalidat == false || emailvalidate == false || isphone == false{
+           ErrorAlertShow(Title: "Error", Message: "CNIC contains only No or Email is  Not correct format may be phoneNo  is  Not correct format ")
         }else{
-            ErrorAlertShow(Title: "Error", Message: "Erro please chek")
+            ErrorAlertShow(Title: "OOPS", Message: "Error")
         }
         
     }
-    fileprivate func isEmailValide(EmailText:String?)->Bool{
-        guard EmailText != nil else {return false}
-        let regexp = NSPredicate(format: "SELF MATCHES %@",EmailRegex)
-        return regexp.evaluate(with:EmailText)
+    private func SaveRegisteration(with user : User , name:String ,cnic:String,address:String,phone:String){
+        let databaserefernce = Database.database().reference().child("DriverUser").child(user.uid)
+        guard let email = user.email else{return}
+        let Values = ["Name":name,"email":email,"Cnic":cnic,"address":address,"phone":phone]
+        databaserefernce.setValue(Values)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        loginfor()
+        return true
     }
     func ErrorAlertShow(Title:String,Message:String){
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }

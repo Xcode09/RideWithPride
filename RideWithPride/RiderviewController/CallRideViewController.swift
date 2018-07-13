@@ -11,17 +11,16 @@ import MapKit
 import FirebaseAuth
 import FirebaseDatabase
 class CallRideViewController: UIViewController,CLLocationManagerDelegate {
-    //@IBOutlet weak var map:MKMapView!
     @IBOutlet weak var Sideview : UIView!
     @IBOutlet weak var layout : NSLayoutConstraint!
     @IBOutlet weak var SideBaremail: UILabel!
     @IBOutlet weak var stack : UIStackView!
-    //@IBOutlet weak var labelshow: UILabel!
     
     /// Mark: properties
     var userloaction : CLLocationCoordinate2D?
     var LocationManager = CLLocationManager()
     var CancleRide:Bool=false
+    var timer : Timer?
     lazy var map:MKMapView={
         var map = MKMapView()
         map.showsCompass = true
@@ -33,24 +32,26 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
     }()
     lazy var viewshow : UIView = {
         var view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints=false
         return view
     }()
+    lazy var label : UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.bold)
+        label.textColor = UIColor(cgColor: CGColor.colorForbtn())
+        label.translatesAutoresizingMaskIntoConstraints=false
+        return label
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.insertSubview(map, at: 0)
         self.view.addSubview(viewshow)
-        map.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
-        map.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
-        map.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
-        map.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
-        viewshow.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
-        viewshow.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
-        viewshow.topAnchor.constraint(equalTo: view.topAnchor , constant:16).isActive=true
-        viewshow.widthAnchor.constraint(equalToConstant: view.frame.width).isActive=true
-        viewshow.heightAnchor.constraint(equalToConstant: 30).isActive=true
+        extractedFuncofconstraints()
+        labelShow()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,22 +63,35 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
         LocationManager.requestWhenInUseAuthorization()
         LocationManager.showsBackgroundLocationIndicator=true
         LocationManager.delegate = self
-        LocationManager.startUpdatingLocation()
+        LocationManager.activityType = .automotiveNavigation
+        LocationManager.pausesLocationUpdatesAutomatically = false
+        let time = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startlocation), userInfo: nil, repeats: true)
+        time.fire()
+        print(time.fireDate)
         
     }
+    @objc func startlocation(){
+        DispatchQueue.global(qos: .background).async {
+            self.LocationManager.startUpdatingLocation()
+        }
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let manager = manager.location?.coordinate else {return}
+        guard let locatio = locations.last else {return}
+         let manager = locatio.coordinate
+        print("Loaction of     \(locations.last!)")
         let coordinate = CLLocationCoordinate2D(latitude: manager.latitude, longitude: manager.longitude)
         userloaction = coordinate
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let camera = MKMapCamera(lookingAtCenter: coordinate, fromEyeCoordinate: coordinate, eyeAltitude: CLLocationDistance.infinity)
+        map.setCamera(camera, animated: true)
         map.setRegion(region, animated: true)
         geoloaction()
         annotations()
-        LocationManager.stopUpdatingLocation()
+       LocationManager.stopUpdatingLocation()
     }
     private func annotations(){
         let annotion = MKPointAnnotation()
-        annotion.title = "My loaction"
+        annotion.title = "your loaction"
         annotion.coordinate = userloaction!
         map.addAnnotation(annotion)
     }
@@ -96,7 +110,7 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
             let ref = Database.database().reference().child("loaction").childByAutoId()
             ref.setValue(Values)
             CancleRide = true
-            sender.setTitle("Cancel a Ride", for: .normal)
+            sender.setTitle("Cancel", for: .normal)
         }
        
     }
@@ -117,13 +131,30 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
             if error != nil{
                 
             }else{
-                let place = placemark![0]
-                DispatchQueue.main.async {
-                    //self.labelshow.text = place.country
-                }
+                guard let place = placemark?.last else {return}
+                print("\(String(describing: place.locality)) \(String(describing: place.administrativeArea))")
             }
             
         }
+    }
+    fileprivate func extractedFuncofconstraints() {
+        map.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
+        map.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
+        map.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
+        map.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
+        viewshow.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
+        viewshow.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
+        viewshow.topAnchor.constraint(equalTo: view.topAnchor , constant:30).isActive=true
+        viewshow.widthAnchor.constraint(equalToConstant: view.frame.width).isActive=true
+        viewshow.heightAnchor.constraint(equalToConstant: 50).isActive=true
+    }
+    private func labelShow(){
+        self.viewshow.addSubview(label)
+        label.textAlignment = .justified
+        label.topAnchor.constraint(equalTo: viewshow.topAnchor, constant: 8).isActive=true
+        label.bottomAnchor.constraint(equalTo: viewshow.bottomAnchor, constant: 8).isActive=true
+        label.leftAnchor.constraint(equalTo: viewshow.leftAnchor, constant: 8).isActive=true
+        label.rightAnchor.constraint(equalTo: viewshow.rightAnchor, constant: 8).isActive=true
     }
     deinit {
         

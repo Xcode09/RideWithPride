@@ -34,7 +34,7 @@
 /* Begin PBXFileReference section */
 		13290AC620EEAFDE00BB1829 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		1333E9C820F4D790005A1EDA /* place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = place.swift; sourceTree = "<group>"; };
-		1373C0DB20F372890078E73A /* CallRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRideViewController.swift; sourceTree = "<group>"; };
+		1373C0DB20F372890078E73A /* CallRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1378F7C720EF98B500BE8E30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1378F7CD20EFB76400BE8E30 /* createAccountRiderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountRiderView.swift; sourceTree = "<group>"; };
 		137AD6BA20F532FD007BFB22 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
