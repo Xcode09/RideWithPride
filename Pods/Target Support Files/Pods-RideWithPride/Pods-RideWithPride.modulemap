@@ -1,0 +1,6 @@
+framework module Pods_RideWithPride {
+  umbrella header "Pods-RideWithPride-umbrella.h"
+
+  export *
+  module * { export * }
+}
