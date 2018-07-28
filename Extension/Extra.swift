@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 extension CGColor{
     class func colorForbtn()->CGColor{
         let color = UIColor(red: 57/255, green: 45/255, blue: 24/255, alpha: 1).cgColor

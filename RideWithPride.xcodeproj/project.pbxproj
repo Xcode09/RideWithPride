@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13290AC720EEAFDE00BB1829 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 13290AC620EEAFDE00BB1829 /* Icon.png */; };
 		1333E9C920F4D790005A1EDA /* place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1333E9C820F4D790005A1EDA /* place.swift */; };
+		1334B8B620FCC68100DA1E2A /* InternetCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */; };
+		1334B8B720FCC68100DA1E2A /* InternetCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1373C0DB20F372890078E73A /* CallRideViewController.swift */; };
+		13787AAF20FA18BF00E748A2 /* DriverControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */; };
+		13787AB120FA18E300E748A2 /* DriverControlPanel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */; };
 		1378F7C820EF98B500BE8E30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1378F7C720EF98B500BE8E30 /* Assets.xcassets */; };
 		1378F7CE20EFB76400BE8E30 /* createAccountRiderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378F7CD20EFB76400BE8E30 /* createAccountRiderView.swift */; };
 		137AD6BB20F532FD007BFB22 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AD6BA20F532FD007BFB22 /* Extra.swift */; };
@@ -18,23 +21,60 @@
 		138626B220EE4FEF0028BC2F /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138626B120EE4FEF0028BC2F /* PageViewController.swift */; };
 		138626B420EE55140028BC2F /* VRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138626B320EE55140028BC2F /* VRController.swift */; };
 		138626B620EE55350028BC2F /* VDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138626B520EE55350028BC2F /* VDViewController.swift */; };
+		1386A75E20FC99090009BBE6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1386A75D20FC99090009BBE6 /* Icon.png */; };
 		138AAC9920EFC12300E7BC65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 138AAC9820EFC12300E7BC65 /* GoogleService-Info.plist */; };
+		13AAFA1F210231A9006FDE92 /* ExtenCallRideViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AAFA1E210231A9006FDE92 /* ExtenCallRideViewcontroller.swift */; };
 		13B8589920F14DAF0049C026 /* Luminari.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B8589820F14DAF0049C026 /* Luminari.ttf */; };
 		13BED2C920ED45830009C3E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BED2C820ED45830009C3E2 /* AppDelegate.swift */; };
 		13BED2CB20ED45840009C3E2 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BED2CA20ED45840009C3E2 /* RiderViewController.swift */; };
 		13BED2D320ED45850009C3E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13BED2D120ED45850009C3E2 /* LaunchScreen.storyboard */; };
 		13BED2DB20ED5AE40009C3E2 /* CreateAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13BED2DA20ED5AE40009C3E2 /* CreateAccount.storyboard */; };
+		13C4DA9220F92AB600A1376F /* UItabelTableViewCellDR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4DA9120F92A6D00A1376F /* UItabelTableViewCellDR.swift */; };
+		13C4DA9420F92B7E00A1376F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4DA9320F92B7E00A1376F /* TableViewController.swift */; };
+		13D0D05A2102578800C812BD /* Rides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0D0592102578800C812BD /* Rides.swift */; };
 		13F7021120F5004B00D4BA23 /* logsa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F7021020F5004B00D4BA23 /* logsa.swift */; };
 		13F7021320F51F4800D4BA23 /* DriverLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F7021220F51F4800D4BA23 /* DriverLogin.storyboard */; };
 		13F7021520F51F6F00D4BA23 /* DriverLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F7021420F51F6F00D4BA23 /* DriverLoginViewController.swift */; };
-		13F7021720F5266300D4BA23 /* DriverRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F7021620F5266300D4BA23 /* DriverRegister.swift */; };
-		B85FD57829423DFCF8CF2569 /* Pods_RideWithPride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC859983C6D609C368BA38 /* Pods_RideWithPride.framework */; };
+		B85FD57829423DFCF8CF2569 /* Pods_RideWithPride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC859983C6D609C368BA38 /* Pods_RideWithPride.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1334B8B420FCC67B00DA1E2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 133BE04720FCBC8900F1C24A;
+			remoteInfo = InternetCheck;
+		};
+		1334B8B820FCC68100DA1E2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 133BE04620FCBC8900F1C24A;
+			remoteInfo = InternetCheck;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1334B8AE20FCC3D400DA1E2A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1334B8B720FCC68100DA1E2A /* InternetCheck.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		13290AC620EEAFDE00BB1829 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		1333E9C820F4D790005A1EDA /* place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = place.swift; sourceTree = "<group>"; };
+		1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InternetCheck.xcodeproj; path = ../../InternetCheck/InternetCheck.xcodeproj; sourceTree = "<group>"; };
 		1373C0DB20F372890078E73A /* CallRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverControlViewController.swift; sourceTree = "<group>"; };
+		13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverControlPanel.storyboard; sourceTree = "<group>"; };
 		1378F7C720EF98B500BE8E30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1378F7CD20EFB76400BE8E30 /* createAccountRiderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountRiderView.swift; sourceTree = "<group>"; };
 		137AD6BA20F532FD007BFB22 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
@@ -43,7 +83,9 @@
 		138626B120EE4FEF0028BC2F /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		138626B320EE55140028BC2F /* VRController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VRController.swift; sourceTree = "<group>"; };
 		138626B520EE55350028BC2F /* VDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDViewController.swift; sourceTree = "<group>"; };
+		1386A75D20FC99090009BBE6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		138AAC9820EFC12300E7BC65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		13AAFA1E210231A9006FDE92 /* ExtenCallRideViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenCallRideViewcontroller.swift; sourceTree = "<group>"; };
 		13B8589820F14DAF0049C026 /* Luminari.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Luminari.ttf; sourceTree = "<group>"; };
 		13BED2C520ED45830009C3E2 /* RideWithPride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideWithPride.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13BED2C820ED45830009C3E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,10 +93,12 @@
 		13BED2D220ED45850009C3E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13BED2D420ED45850009C3E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13BED2DA20ED5AE40009C3E2 /* CreateAccount.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateAccount.storyboard; sourceTree = "<group>"; };
+		13C4DA9120F92A6D00A1376F /* UItabelTableViewCellDR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UItabelTableViewCellDR.swift; sourceTree = "<group>"; };
+		13C4DA9320F92B7E00A1376F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		13D0D0592102578800C812BD /* Rides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rides.swift; sourceTree = "<group>"; };
 		13F7021020F5004B00D4BA23 /* logsa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logsa.swift; sourceTree = "<group>"; };
 		13F7021220F51F4800D4BA23 /* DriverLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverLogin.storyboard; sourceTree = "<group>"; };
 		13F7021420F51F6F00D4BA23 /* DriverLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLoginViewController.swift; sourceTree = "<group>"; };
-		13F7021620F5266300D4BA23 /* DriverRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRegister.swift; sourceTree = "<group>"; };
 		68EC859983C6D609C368BA38 /* Pods_RideWithPride.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RideWithPride.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E573EFD72CD7517D3E08B313 /* Pods-RideWithPride.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideWithPride.release.xcconfig"; path = "Pods/Target Support Files/Pods-RideWithPride/Pods-RideWithPride.release.xcconfig"; sourceTree = "<group>"; };
 		EAB2A0482056198224F5CE85 /* Pods-RideWithPride.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideWithPride.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RideWithPride/Pods-RideWithPride.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1334B8B620FCC68100DA1E2A /* InternetCheck.framework in Frameworks */,
 				B85FD57829423DFCF8CF2569 /* Pods_RideWithPride.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,12 +127,21 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		1334B8B120FCC67B00DA1E2A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1378F7C920EFB6A900BE8E30 /* RiderviewController */ = {
 			isa = PBXGroup;
 			children = (
 				13BED2CA20ED45840009C3E2 /* RiderViewController.swift */,
 				1378F7CD20EFB76400BE8E30 /* createAccountRiderView.swift */,
 				1373C0DB20F372890078E73A /* CallRideViewController.swift */,
+				13AAFA1E210231A9006FDE92 /* ExtenCallRideViewcontroller.swift */,
 			);
 			path = RiderviewController;
 			sourceTree = "<group>";
@@ -105,8 +159,8 @@
 		1378F7CB20EFB71600BE8E30 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				1386A75D20FC99090009BBE6 /* Icon.png */,
 				138AAC9820EFC12300E7BC65 /* GoogleService-Info.plist */,
-				13290AC620EEAFDE00BB1829 /* Icon.png */,
 				13BED2C820ED45830009C3E2 /* AppDelegate.swift */,
 				13BED2D120ED45850009C3E2 /* LaunchScreen.storyboard */,
 				13B8589820F14DAF0049C026 /* Luminari.ttf */,
@@ -117,8 +171,11 @@
 		1378F7CC20EFB72C00BE8E30 /* DriverViewController */ = {
 			isa = PBXGroup;
 			children = (
+				13C4DA9320F92B7E00A1376F /* TableViewController.swift */,
+				13C4DA9120F92A6D00A1376F /* UItabelTableViewCellDR.swift */,
 				13F7021420F51F6F00D4BA23 /* DriverLoginViewController.swift */,
-				13F7021620F5266300D4BA23 /* DriverRegister.swift */,
+				13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */,
+				13D0D0592102578800C812BD /* Rides.swift */,
 			);
 			path = DriverViewController;
 			sourceTree = "<group>";
@@ -126,6 +183,7 @@
 		13BED2BC20ED45830009C3E2 = {
 			isa = PBXGroup;
 			children = (
+				1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */,
 				1333E9C320F4BF4B005A1EDA /* Extension */,
 				13BED2C720ED45830009C3E2 /* RideWithPride */,
 				13BED2C620ED45830009C3E2 /* Products */,
@@ -160,6 +218,7 @@
 			children = (
 				138626A720EE41F20028BC2F /* Main.storyboard */,
 				13F7021220F51F4800D4BA23 /* DriverLogin.storyboard */,
+				13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */,
 				138626AF20EE4F9A0028BC2F /* Rider1.storyboard */,
 				13BED2DA20ED5AE40009C3E2 /* CreateAccount.storyboard */,
 				1378F7C720EF98B500BE8E30 /* Assets.xcassets */,
@@ -196,10 +255,12 @@
 				13BED2C220ED45830009C3E2 /* Frameworks */,
 				13BED2C320ED45830009C3E2 /* Resources */,
 				CC14768E47EED92ADA039C68 /* [CP] Embed Pods Frameworks */,
+				1334B8AE20FCC3D400DA1E2A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1334B8B920FCC68100DA1E2A /* PBXTargetDependency */,
 			);
 			name = RideWithPride;
 			productName = RideWithPride;
@@ -232,6 +293,12 @@
 			mainGroup = 13BED2BC20ED45830009C3E2;
 			productRefGroup = 13BED2C620ED45830009C3E2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1334B8B120FCC67B00DA1E2A /* Products */;
+					ProjectRef = 1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13BED2C420ED45830009C3E2 /* RideWithPride */,
@@ -239,14 +306,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = InternetCheck.framework;
+			remoteRef = 1334B8B420FCC67B00DA1E2A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		13BED2C320ED45830009C3E2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13290AC720EEAFDE00BB1829 /* Icon.png in Resources */,
 				13F7021320F51F4800D4BA23 /* DriverLogin.storyboard in Resources */,
 				13B8589920F14DAF0049C026 /* Luminari.ttf in Resources */,
+				1386A75E20FC99090009BBE6 /* Icon.png in Resources */,
+				13787AB120FA18E300E748A2 /* DriverControlPanel.storyboard in Resources */,
 				138AAC9920EFC12300E7BC65 /* GoogleService-Info.plist in Resources */,
 				138626B020EE4F9A0028BC2F /* Rider1.storyboard in Resources */,
 				13BED2DB20ED5AE40009C3E2 /* CreateAccount.storyboard in Resources */,
@@ -309,8 +387,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13F7021520F51F6F00D4BA23 /* DriverLoginViewController.swift in Sources */,
-				13F7021720F5266300D4BA23 /* DriverRegister.swift in Sources */,
+				13C4DA9420F92B7E00A1376F /* TableViewController.swift in Sources */,
+				13C4DA9220F92AB600A1376F /* UItabelTableViewCellDR.swift in Sources */,
 				137AD6BB20F532FD007BFB22 /* Extra.swift in Sources */,
+				13AAFA1F210231A9006FDE92 /* ExtenCallRideViewcontroller.swift in Sources */,
 				138626B620EE55350028BC2F /* VDViewController.swift in Sources */,
 				138626B220EE4FEF0028BC2F /* PageViewController.swift in Sources */,
 				13F7021120F5004B00D4BA23 /* logsa.swift in Sources */,
@@ -318,12 +398,22 @@
 				1378F7CE20EFB76400BE8E30 /* createAccountRiderView.swift in Sources */,
 				13BED2CB20ED45840009C3E2 /* RiderViewController.swift in Sources */,
 				1333E9C920F4D790005A1EDA /* place.swift in Sources */,
+				13787AAF20FA18BF00E748A2 /* DriverControlViewController.swift in Sources */,
+				13D0D05A2102578800C812BD /* Rides.swift in Sources */,
 				1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */,
 				13BED2C920ED45830009C3E2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1334B8B920FCC68100DA1E2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InternetCheck;
+			targetProxy = 1334B8B820FCC68100DA1E2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13BED2D120ED45850009C3E2 /* LaunchScreen.storyboard */ = {
@@ -455,6 +545,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAB2A0482056198224F5CE85 /* Pods-RideWithPride.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8TRWBBRCRY;
@@ -474,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E573EFD72CD7517D3E08B313 /* Pods-RideWithPride.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8TRWBBRCRY;

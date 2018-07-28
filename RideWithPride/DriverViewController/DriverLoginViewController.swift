@@ -15,22 +15,23 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
      @IBOutlet weak var createbtin:UIButton!
     @IBOutlet weak var activity : UIActivityIndicatorView!
     
-    
+    var vc : UIViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         ViewDidLoadthings()
+        print(self.isBeingDismissed)
 
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-//    @objc func navigatevc(){
-//        let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Drivervc")
-//        self.present(callaride, animated: true, completion: nil)
-//    }
     
     @IBAction func Login(_ sender:UIButton){
         login()
+    }
+    @IBAction func resigter(_ sender:UIButton ){
+        self.dismiss(animated: true, completion: nil)
+            
     }
     private func login(){
         activity.startAnimating()
@@ -40,11 +41,15 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
         if email != "" && password != ""{
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if error != nil{
-                    print(error?.localizedDescription ?? "")
+                    let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
+                    self.present(alert, animated: true, completion: nil)
                     self.activity.stopAnimating()
                     self.activity.isHidden = true
                 }else {
-                   
+                   let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "DR")
+                    self.activity.stopAnimating()
+                    self.activity.isHidden = true
+                    self.present(vc, animated: true)
                 }
                 
             }
@@ -68,9 +73,9 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     fileprivate func ViewDidLoadthings() {
         self.emailtextfield.delegate = self
         self.Passwordtextfield.delegate = self
-//        if Auth.auth().currentUser != nil {
-//            perform(#selector(navigatevc), with: self, afterDelay: 0.1)
-//        }
+        if Auth.auth().currentUser != nil {
+            perform(#selector(navigatevc), with: self, afterDelay: 0.3)
+        }
         activity?.isHidden = true
         logn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         createbtin.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
@@ -78,5 +83,12 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
         logn.layer.cornerRadius = 10
         createbtin.layer.contentsScale = 10
         createbtin.layer.cornerRadius = 10
+    }
+    @objc func navigatevc(){
+        let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "DR")
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    deinit {
     }
 }

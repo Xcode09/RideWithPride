@@ -21,6 +21,11 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
     var LocationManager = CLLocationManager()
     var CancleRide:Bool=false
     var timer : Timer?
+    var snap : [DataSnapshot] = []
+    var DriverName:String?
+    var corrdination:CLLocationCoordinate2D?
+    var lat:CLLocationDegrees = CLLocationDegrees()
+    var log:CLLocationDegrees = CLLocationDegrees()
     lazy var map:MKMapView={
         var map = MKMapView()
         map.showsCompass = true
@@ -55,48 +60,54 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        Database.database().reference().child("DriverUser").observe(.childAdded) { (snapshot) in
+            self.snap.append(snapshot)
+        }
         setLoation()
+        
     }
-    private func setLoation(){
+    func setLoation(){
         LocationManager.desiredAccuracy = kCLLocationAccuracyBest
         LocationManager.requestWhenInUseAuthorization()
         LocationManager.showsBackgroundLocationIndicator=true
         LocationManager.delegate = self
         LocationManager.activityType = .automotiveNavigation
         LocationManager.pausesLocationUpdatesAutomatically = false
-        let time = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startlocation), userInfo: nil, repeats: true)
-        time.fire()
-        print(time.fireDate)
+        LocationManager.startUpdatingLocation()
+        //        let time = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startlocation), userInfo: nil, repeats: true)
+        //        time.fire()
+        
+        
         
     }
-    @objc func startlocation(){
-        DispatchQueue.global(qos: .background).async {
-            self.LocationManager.startUpdatingLocation()
-        }
-    }
+    //    @objc func startlocation(){
+    //        DispatchQueue.global(qos: .background).async {
+    //            self.LocationManager.startUpdatingLocation()
+    //        }
+    //    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locatio = locations.last else {return}
-         let manager = locatio.coordinate
-        print("Loaction of     \(locations.last!)")
+        let manager = locatio.coordinate
         let coordinate = CLLocationCoordinate2D(latitude: manager.latitude, longitude: manager.longitude)
         userloaction = coordinate
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        let camera = MKMapCamera(lookingAtCenter: coordinate, fromEyeCoordinate: coordinate, eyeAltitude: CLLocationDistance.infinity)
-        map.setCamera(camera, animated: true)
         map.setRegion(region, animated: true)
         geoloaction()
         annotations()
-       LocationManager.stopUpdatingLocation()
+        LocationManager.stopUpdatingLocation()
     }
     private func annotations(){
-        let annotion = MKPointAnnotation()
-        annotion.title = "your loaction"
-        annotion.coordinate = userloaction!
-        map.addAnnotation(annotion)
+        let usrannotion = MKPointAnnotation()
+        usrannotion.title = "My cuurent loaction"
+        usrannotion.coordinate = userloaction!
+        map.addAnnotations([usrannotion])
     }
+    
+    
     @IBAction func callaride(_ sender : UIButton){
-        guard let email = Auth.auth().currentUser?.email else {return}
+        guard let email = Auth.auth().currentUser?.email else {
+            print("Email is not found")
+            return}
         if CancleRide{
             CancleRide = false
             sender.setTitle("Call a Ride", for: .normal)
@@ -112,11 +123,18 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
             CancleRide = true
             sender.setTitle("Cancel", for: .normal)
         }
-       
+        
     }
     
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
+        guard let email = Auth.auth().currentUser?.email else {
+            
+            return}
+            Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
+            sanpshot.ref.removeValue()
+            Database.database().reference().child("loaction").removeAllObservers()
+        }
         do{
             try Auth.auth().signOut()
             self.dismiss(animated: true, completion: nil)
@@ -124,41 +142,14 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
             print("Errror")
         }
     }
-    func geoloaction(){
-        let geo = CLGeocoder()
-        let CLLoaction = CLLocation(latitude: (userloaction?.latitude)!, longitude: (userloaction?.longitude)!)
-        geo.reverseGeocodeLocation(CLLoaction) { (placemark, error) in
-            if error != nil{
-                
-            }else{
-                guard let place = placemark?.last else {return}
-                print("\(String(describing: place.locality)) \(String(describing: place.administrativeArea))")
-            }
-            
-        }
-    }
-    fileprivate func extractedFuncofconstraints() {
-        map.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
-        map.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
-        map.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
-        map.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
-        viewshow.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
-        viewshow.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
-        viewshow.topAnchor.constraint(equalTo: view.topAnchor , constant:30).isActive=true
-        viewshow.widthAnchor.constraint(equalToConstant: view.frame.width).isActive=true
-        viewshow.heightAnchor.constraint(equalToConstant: 50).isActive=true
-    }
-    private func labelShow(){
-        self.viewshow.addSubview(label)
-        label.textAlignment = .justified
-        label.topAnchor.constraint(equalTo: viewshow.topAnchor, constant: 8).isActive=true
-        label.bottomAnchor.constraint(equalTo: viewshow.bottomAnchor, constant: 8).isActive=true
-        label.leftAnchor.constraint(equalTo: viewshow.leftAnchor, constant: 8).isActive=true
-        label.rightAnchor.constraint(equalTo: viewshow.rightAnchor, constant: 8).isActive=true
-    }
+    
     deinit {
         
     }
     
-    
+}
+extension CLLocationCoordinate2D:Equatable{
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool{
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
 }

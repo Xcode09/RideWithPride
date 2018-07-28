@@ -24,6 +24,10 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
         if let fristvc = viewcontrollers.first{
             setViewControllers([fristvc], direction: .forward, animated: true, completion: nil)
         }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("Not"), object: nil, queue: OperationQueue.main) { (noti) in
+            let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: "Internet is offline")
+            self.present(alert, animated: true, completion: nil)
+        }
        
     }
     /// Mark: instantiateViewController
@@ -76,6 +80,9 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
             return nil
         }
         return viewcontrollers[AfterviewcontrollerIndex]
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
 }
