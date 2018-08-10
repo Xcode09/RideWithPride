@@ -49,11 +49,10 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
         self.pageControll.updateCurrentPageDisplay()
         self.view.addSubview(pageControll)
     }
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        self.pageControll.currentPage = (viewControllers?.index(of: pageViewController.viewControllers![0]))!
-        
-    }
-    
+//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        self.pageControll.currentPage = (viewControllers?.index(of: pageViewController.viewControllers![0]))!
+//        
+//    }
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let beforeViewcontroller = viewcontrollers.index(of: viewController) else{ return nil}
         let periousviewcontrollerIndex = beforeViewcontroller - 1

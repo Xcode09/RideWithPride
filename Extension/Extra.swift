@@ -10,9 +10,23 @@ import UIKit
 import CoreLocation
 extension CGColor{
     class func colorForbtn()->CGColor{
-        let color = UIColor(red: 57/255, green: 45/255, blue: 24/255, alpha: 1).cgColor
+        let color = UIColor(red: 46/255, green: 57/255, blue: 24/255, alpha: 0.70).cgColor
         return color
     }
+}
+extension UIImageView{
+    func CreateImageView(Image name:String)->UIImageView{
+        let image:UIImageView={
+            let image = UIImageView()
+            image.contentMode = .scaleAspectFill
+            image.translatesAutoresizingMaskIntoConstraints=false
+            image.image = UIImage(named: name)
+            image.clipsToBounds = true
+            return image
+        }()
+        return image
+    }
+    
 }
 extension RiderViewController{
     func ClearTextfeild(){

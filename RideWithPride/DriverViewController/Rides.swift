@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 import FirebaseDatabase
 struct Riders{
    typealias  compilation = ((Double,String,CLLocation)->Void)
@@ -30,4 +31,22 @@ struct Riders{
         }
     }
 }
+}
+extension DriverLoginViewController{
+ func KeyboardManagement(){
+        NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
+            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+            print(noti)
+            self.view.frame.origin.y = -70
+
+
+    }
+    NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (noti) in
+        let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+        self.view.frame.origin.y = 0
+        
+        
+    }
+    }
+    
 }

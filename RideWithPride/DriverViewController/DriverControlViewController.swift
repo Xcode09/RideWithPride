@@ -90,13 +90,33 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate {
     DataSnapshot.ref.updateChildValues(["Drilati" : self.Driverlocation.latitude,"log":self.Driverlocation.longitude])
     Database.database().reference().child("loaction").removeAllObservers()
     })
-    CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemark, error) in
-    guard let place = placemark?.first else {return}
-    let MKPlace = MKPlacemark(placemark: place)
-    let item = MKMapItem(placemark: MKPlace)
-    item.name = email
-    let options = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving]
-    item.openInMaps(launchOptions: options)
-    })
+        
+    ///Directions Show
+        
+    let sourcedes = CLLocationCoordinate2D(latitude: Driverlocation.latitude, longitude: Driverlocation.longitude)
+    let destination = location.coordinate
+    let MKSoucreMark = MKPlacemark(coordinate: sourcedes)
+    let MKDesMark = MKPlacemark(coordinate: destination)
+        let item = MKMapItem(placemark: MKSoucreMark)
+        let desitem = MKMapItem(placemark: MKDesMark)
+    let directionresquest = MKDirectionsRequest()
+        directionresquest.source = item
+        directionresquest.destination = desitem
+        directionresquest.transportType = .automobile
+    let  directions = MKDirections(request: directionresquest)
+        directions.calculate { (respone , error) in
+            if error != nil{
+                let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
+                self.present(alert, animated: false, completion: nil)
+                
+            }
+            guard let routes = respone?.routes[0] else {
+                print("Error in Routes ")
+                return
+            }
+            self.map.add((routes.polyline), level: .aboveRoads)
+            let rectmap = routes.polyline.boundingMapRect
+            self.map.setRegion(MKCoordinateRegionForMapRect(rectmap), animated: true)
+        }
     }
 }

@@ -32,7 +32,10 @@ class createAccountRiderView: UIViewController {
     /// Mark : Back To Login
     @IBAction func BackToLogin(_ sender:UIButton){
         let loginview = UIStoryboard(name: "Rider1", bundle: nil).instantiateViewController(withIdentifier: "UIViewController-BYZ-38-t0r")
-        self.present(loginview, animated: true, completion: nil)
+        self.dismiss(animated: false) {
+            self.present(loginview, animated: true, completion: nil)
+        }
+        
     }
     
     @IBAction func CreateAccount(_ sender:UIButton){

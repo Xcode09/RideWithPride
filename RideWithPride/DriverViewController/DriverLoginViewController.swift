@@ -14,13 +14,12 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
      @IBOutlet weak var logn:UIButton!
      @IBOutlet weak var createbtin:UIButton!
     @IBOutlet weak var activity : UIActivityIndicatorView!
+    @IBOutlet weak var stackview : UIStackView!
     
     var vc : UIViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         ViewDidLoadthings()
-        print(self.isBeingDismissed)
-
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -54,6 +53,8 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
                 
             }
         }else{
+           let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: "Fields Are Empty......")
+            self.present(alert, animated: true, completion: nil)
             activity.stopAnimating()
             activity.isHidden = true
         }
@@ -73,6 +74,7 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     fileprivate func ViewDidLoadthings() {
         self.emailtextfield.delegate = self
         self.Passwordtextfield.delegate = self
+         KeyboardManagement()
         if Auth.auth().currentUser != nil {
             perform(#selector(navigatevc), with: self, afterDelay: 0.3)
         }
@@ -90,5 +92,9 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
     }
 }

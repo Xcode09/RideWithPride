@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
+import GooglePlaces
 import FirebaseAuth
 import FirebaseDatabase
 class CallRideViewController: UIViewController,CLLocationManagerDelegate {
@@ -15,7 +16,7 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var layout : NSLayoutConstraint!
     @IBOutlet weak var SideBaremail: UILabel!
     @IBOutlet weak var stack : UIStackView!
-    
+    @IBOutlet weak var btn : UIButton!
     /// Mark: properties
     var userloaction : CLLocationCoordinate2D?
     var LocationManager = CLLocationManager()
@@ -26,37 +27,22 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
     var corrdination:CLLocationCoordinate2D?
     var lat:CLLocationDegrees = CLLocationDegrees()
     var log:CLLocationDegrees = CLLocationDegrees()
-    lazy var map:MKMapView={
-        var map = MKMapView()
-        map.showsCompass = true
-        map.isScrollEnabled = true
-        map.showsBuildings = true
-        map.showsUserLocation = true
+    lazy var map:GMSMapView={
+        var map = GMSMapView()
+        map.isBuildingsEnabled = true
+        map.isMyLocationEnabled = true
+        map.settings.compassButton = true
         map.translatesAutoresizingMaskIntoConstraints=false
         return map
     }()
-    lazy var viewshow : UIView = {
-        var view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints=false
-        return view
-    }()
-    lazy var label : UILabel = {
-        var label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.bold)
-        label.textColor = UIColor(cgColor: CGColor.colorForbtn())
-        label.translatesAutoresizingMaskIntoConstraints=false
-        return label
-    }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.insertSubview(map, at: 0)
-        self.view.addSubview(viewshow)
+        btn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
+        btn.layer.cornerRadius = 10
+        btn.setTitleColor(UIColor.white, for: .normal)
         extractedFuncofconstraints()
-        labelShow()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,40 +53,40 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
         
     }
     func setLoation(){
-        LocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        LocationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         LocationManager.requestWhenInUseAuthorization()
         LocationManager.showsBackgroundLocationIndicator=true
         LocationManager.delegate = self
         LocationManager.activityType = .automotiveNavigation
         LocationManager.pausesLocationUpdatesAutomatically = false
         LocationManager.startUpdatingLocation()
-        //        let time = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startlocation), userInfo: nil, repeats: true)
-        //        time.fire()
-        
-        
-        
     }
-    //    @objc func startlocation(){
-    //        DispatchQueue.global(qos: .background).async {
-    //            self.LocationManager.startUpdatingLocation()
-    //        }
-    //    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locatio = locations.last else {return}
         let manager = locatio.coordinate
         let coordinate = CLLocationCoordinate2D(latitude: manager.latitude, longitude: manager.longitude)
         userloaction = coordinate
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        map.setRegion(region, animated: true)
-        geoloaction()
+        let region = GMSCameraPosition.camera(withTarget: locatio.coordinate, zoom: 25)
+        map.camera = region
         annotations()
         LocationManager.stopUpdatingLocation()
     }
     private func annotations(){
-        let usrannotion = MKPointAnnotation()
-        usrannotion.title = "My cuurent loaction"
-        usrannotion.coordinate = userloaction!
-        map.addAnnotations([usrannotion])
+        GMSPlacesClient().currentPlace { (placelikehood, error) in
+            if error != nil{
+                print("Error")
+            }else{
+                guard let place = placelikehood else {return}
+                for places in place.likelihoods{
+                    DispatchQueue.main.async {
+                        let usrannotion = GMSMarker(position: self.userloaction!)
+                        usrannotion.title = places.place.name
+                        usrannotion.snippet = places.place.formattedAddress
+                        usrannotion.map = self.map
+                    }
+                }
+            }
+        }
     }
     
     
@@ -125,28 +111,6 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate {
         }
         
     }
-    
-    
-    @IBAction func logout(_ sender: UIBarButtonItem) {
-        guard let email = Auth.auth().currentUser?.email else {
-            
-            return}
-            Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
-            sanpshot.ref.removeValue()
-            Database.database().reference().child("loaction").removeAllObservers()
-        }
-        do{
-            try Auth.auth().signOut()
-            self.dismiss(animated: true, completion: nil)
-        }catch{
-            print("Errror")
-        }
-    }
-    
-    deinit {
-        
-    }
-    
 }
 extension CLLocationCoordinate2D:Equatable{
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool{

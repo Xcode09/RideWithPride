@@ -17,6 +17,7 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Delegates
         self.emailtextfield.delegate = self
         self.Passwordtextfield.delegate = self
         activity?.isHidden = true
@@ -48,6 +49,8 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
         guard let email = emailtextfield.text else {return}
         guard let password = Passwordtextfield.text else{return}
         if email != "" && password != ""{
+            // Authentication with Firebase
+            
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if error != nil{
                     self.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
@@ -58,6 +61,7 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
                     self.activity.stopAnimating()
                     self.activity.isHidden = true
                     ExtraThings.Cleartext(NameField: self.emailtextfield,passwordfiled: self.Passwordtextfield)
+                    // Navigate to Main RidePanel
                     let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
                     self.present(callaride, animated: true, completion: nil)
                 }

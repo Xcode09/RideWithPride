@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iCG-LH-vBk">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iCG-LH-vBk">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,22 +25,29 @@
             <objects>
                 <viewController storyboardIdentifier="Ridervc" id="Y2b-dE-YJ9" customClass="VRController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E3F-VI-v5y">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-aX-HPz">
-                                <rect key="frame" x="16" y="94" width="288" height="69"/>
+                                <rect key="frame" x="16" y="94" width="343" height="69"/>
                                 <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="50"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start your journey  as a Rider" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRd-ct-4lo">
+                                <rect key="frame" x="0.0" y="251" width="375" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="28"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xT7-qC-Eqc">
-                                <rect key="frame" x="16" y="432" width="287" height="83"/>
+                                <rect key="frame" x="58" y="583" width="259" height="52"/>
                                 <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="83" id="yuE-iV-ZjX"/>
+                                    <constraint firstAttribute="height" constant="52" id="yuE-iV-ZjX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="26"/>
                                 <state key="normal" title="Rider">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -49,21 +55,14 @@
                                     <segue destination="Jfm-bN-dVd" kind="show" id="DG8-gW-N0V"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start your journey  as a Rider" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRd-ct-4lo">
-                                <rect key="frame" x="0.0" y="214" width="320" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dCB-rL-Efp" firstAttribute="trailing" secondItem="xT7-qC-Eqc" secondAttribute="trailing" constant="17" id="26J-3G-wuI"/>
-                            <constraint firstItem="xT7-qC-Eqc" firstAttribute="leading" secondItem="dCB-rL-Efp" secondAttribute="leading" constant="16" id="9VK-q9-UPc"/>
+                            <constraint firstItem="dCB-rL-Efp" firstAttribute="trailing" secondItem="xT7-qC-Eqc" secondAttribute="trailing" constant="58" id="26J-3G-wuI"/>
+                            <constraint firstItem="xT7-qC-Eqc" firstAttribute="leading" secondItem="dCB-rL-Efp" secondAttribute="leading" constant="58" id="9VK-q9-UPc"/>
                             <constraint firstItem="aeM-aX-HPz" firstAttribute="leading" secondItem="E3F-VI-v5y" secondAttribute="leadingMargin" id="EHK-BD-P25"/>
                             <constraint firstItem="aeM-aX-HPz" firstAttribute="top" secondItem="dCB-rL-Efp" secondAttribute="top" constant="74" id="Qxn-80-xLc"/>
-                            <constraint firstItem="dCB-rL-Efp" firstAttribute="bottom" secondItem="xT7-qC-Eqc" secondAttribute="bottom" constant="53" id="SwM-k1-cVr"/>
+                            <constraint firstItem="dCB-rL-Efp" firstAttribute="bottom" secondItem="xT7-qC-Eqc" secondAttribute="bottom" constant="32" id="SwM-k1-cVr"/>
                             <constraint firstItem="aeM-aX-HPz" firstAttribute="trailing" secondItem="E3F-VI-v5y" secondAttribute="trailingMargin" id="qBE-Qx-PJX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dCB-rL-Efp"/>
@@ -97,22 +96,31 @@
             <objects>
                 <viewController storyboardIdentifier="Drivervc" id="k11-93-mWk" customClass="VDViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Jh-vD-4g9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="SWb-sz-JpQ">
-                                <rect key="frame" x="16" y="69" width="288" height="68.5"/>
+                                <rect key="frame" x="16" y="94" width="343" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="a6h-3k-ueu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="50"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Start your journey  as a Driver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-Ex-tbJ">
+                                <rect key="frame" x="0.0" y="215" width="375" height="237"/>
+                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="28"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwI-Ed-zXx">
-                                <rect key="frame" x="14" y="421" width="292" height="83"/>
+                                <rect key="frame" x="58" y="583" width="259" height="52"/>
                                 <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="83" id="jWs-qw-w0d"/>
+                                    <constraint firstAttribute="height" constant="52" id="09E-vI-M28"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="30"/>
                                 <state key="normal" title="Driver">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -120,25 +128,19 @@
                                     <segue destination="CR5-IC-n47" kind="show" id="VeG-u4-dHx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Start your journey  as a Driver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-Ex-tbJ">
-                                <rect key="frame" x="0.0" y="190" width="320" height="140"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" id="3MY-Hb-4lS"/>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="trailing" secondItem="pOi-zc-i5c" secondAttribute="trailing" id="4dS-uo-Qcq"/>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="top" secondItem="SWb-sz-JpQ" secondAttribute="bottom" constant="52.5" id="5L0-aZ-8a9"/>
-                            <constraint firstItem="pOi-zc-i5c" firstAttribute="trailing" secondItem="SWb-sz-JpQ" secondAttribute="trailing" constant="16" id="Swc-t2-VQL"/>
-                            <constraint firstItem="pOi-zc-i5c" firstAttribute="bottom" secondItem="mwI-Ed-zXx" secondAttribute="bottom" constant="64" id="Yn3-xK-Sdf"/>
-                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="top" secondItem="pOi-zc-i5c" secondAttribute="top" constant="49" id="iTw-pU-g5z"/>
-                            <constraint firstItem="mwI-Ed-zXx" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="14" id="ntx-2I-DTd"/>
-                            <constraint firstItem="mwI-Ed-zXx" firstAttribute="top" secondItem="VcJ-Ex-tbJ" secondAttribute="bottom" constant="91" id="uTN-W2-VmO"/>
-                            <constraint firstItem="pOi-zc-i5c" firstAttribute="trailing" secondItem="mwI-Ed-zXx" secondAttribute="trailing" constant="14" id="ugz-UM-5ed"/>
-                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="16" id="wha-Ak-1UN"/>
+                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="leading" secondItem="3Jh-vD-4g9" secondAttribute="leadingMargin" id="1Gz-8v-1dM"/>
+                            <constraint firstAttribute="trailing" secondItem="VcJ-Ex-tbJ" secondAttribute="trailing" id="54z-pk-6xU"/>
+                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="top" secondItem="pOi-zc-i5c" secondAttribute="top" constant="74" id="5J9-gQ-0Lx"/>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="centerY" secondItem="3Jh-vD-4g9" secondAttribute="centerY" id="8ij-lB-bpA"/>
+                            <constraint firstItem="mwI-Ed-zXx" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="58" id="In5-iJ-biH"/>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="leading" secondItem="3Jh-vD-4g9" secondAttribute="leading" id="QJx-kh-Xsy"/>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="centerX" secondItem="mwI-Ed-zXx" secondAttribute="centerX" id="TtB-nq-ctl"/>
+                            <constraint firstItem="pOi-zc-i5c" firstAttribute="bottom" secondItem="mwI-Ed-zXx" secondAttribute="bottom" constant="32" id="jTV-lO-VYd"/>
+                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="centerX" secondItem="VcJ-Ex-tbJ" secondAttribute="centerX" id="tSY-q5-IWB"/>
+                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="top" secondItem="SWb-sz-JpQ" secondAttribute="bottom" constant="51" id="wpl-wH-UuL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pOi-zc-i5c"/>
                     </view>
@@ -148,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZQ-F3-DW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2203.125" y="-1141.9014084507041"/>
+            <point key="canvasLocation" x="1988" y="-1160"/>
         </scene>
     </scenes>
 </document>

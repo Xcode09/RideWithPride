@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1333E9C920F4D790005A1EDA /* place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1333E9C820F4D790005A1EDA /* place.swift */; };
-		1334B8B620FCC68100DA1E2A /* InternetCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */; };
-		1334B8B720FCC68100DA1E2A /* InternetCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1373C0DB20F372890078E73A /* CallRideViewController.swift */; };
 		13787AAF20FA18BF00E748A2 /* DriverControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */; };
 		13787AB120FA18E300E748A2 /* DriverControlPanel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */; };
@@ -38,23 +36,6 @@
 		B85FD57829423DFCF8CF2569 /* Pods_RideWithPride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC859983C6D609C368BA38 /* Pods_RideWithPride.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1334B8B420FCC67B00DA1E2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 133BE04720FCBC8900F1C24A;
-			remoteInfo = InternetCheck;
-		};
-		1334B8B820FCC68100DA1E2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 133BE04620FCBC8900F1C24A;
-			remoteInfo = InternetCheck;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		1334B8AE20FCC3D400DA1E2A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -62,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1334B8B720FCC68100DA1E2A /* InternetCheck.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		1333E9C820F4D790005A1EDA /* place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = place.swift; sourceTree = "<group>"; };
-		1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InternetCheck.xcodeproj; path = ../../InternetCheck/InternetCheck.xcodeproj; sourceTree = "<group>"; };
 		1373C0DB20F372890078E73A /* CallRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverControlViewController.swift; sourceTree = "<group>"; };
 		13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverControlPanel.storyboard; sourceTree = "<group>"; };
@@ -109,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1334B8B620FCC68100DA1E2A /* InternetCheck.framework in Frameworks */,
 				B85FD57829423DFCF8CF2569 /* Pods_RideWithPride.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,14 +103,6 @@
 				137AD6BA20F532FD007BFB22 /* Extra.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		1334B8B120FCC67B00DA1E2A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		1378F7C920EFB6A900BE8E30 /* RiderviewController */ = {
@@ -183,7 +153,6 @@
 		13BED2BC20ED45830009C3E2 = {
 			isa = PBXGroup;
 			children = (
-				1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */,
 				1333E9C320F4BF4B005A1EDA /* Extension */,
 				13BED2C720ED45830009C3E2 /* RideWithPride */,
 				13BED2C620ED45830009C3E2 /* Products */,
@@ -256,11 +225,11 @@
 				13BED2C320ED45830009C3E2 /* Resources */,
 				CC14768E47EED92ADA039C68 /* [CP] Embed Pods Frameworks */,
 				1334B8AE20FCC3D400DA1E2A /* Embed Frameworks */,
+				EBF1AD02EA45AEBFD51CF208 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1334B8B920FCC68100DA1E2A /* PBXTargetDependency */,
 			);
 			name = RideWithPride;
 			productName = RideWithPride;
@@ -293,28 +262,12 @@
 			mainGroup = 13BED2BC20ED45830009C3E2;
 			productRefGroup = 13BED2C620ED45830009C3E2 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 1334B8B120FCC67B00DA1E2A /* Products */;
-					ProjectRef = 1334B8B020FCC67B00DA1E2A /* InternetCheck.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				13BED2C420ED45830009C3E2 /* RideWithPride */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		1334B8B520FCC67B00DA1E2A /* InternetCheck.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = InternetCheck.framework;
-			remoteRef = 1334B8B420FCC67B00DA1E2A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		13BED2C320ED45830009C3E2 /* Resources */ = {
@@ -379,6 +332,28 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RideWithPride/Pods-RideWithPride-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EBF1AD02EA45AEBFD51CF208 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RideWithPride/Pods-RideWithPride-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RideWithPride/Pods-RideWithPride-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -406,14 +381,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1334B8B920FCC68100DA1E2A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = InternetCheck;
-			targetProxy = 1334B8B820FCC68100DA1E2A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13BED2D120ED45850009C3E2 /* LaunchScreen.storyboard */ = {

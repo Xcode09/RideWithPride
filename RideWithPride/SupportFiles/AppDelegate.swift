@@ -8,7 +8,8 @@
 
 import UIKit
 import Firebase
-import InternetCheck
+import GoogleMaps
+import GooglePlaces
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
 
@@ -17,13 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        if InternetCheck.Isinternetavailbe() == true{
-           
-        }else{
-            NotificationCenter.default.post(name: NSNotification.Name("Not"), object: nil)
-            
-        }
-        
+         let key = "AIzaSyBtrl9XeADBO_6orUSZGK26Nv9AOiALunU"
+        GMSServices.provideAPIKey(key)
+        GMSPlacesClient.provideAPIKey(key)
         return true
     }
 
