@@ -27,17 +27,11 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        if Auth.auth().currentUser != nil {
-            perform(#selector(navigatevc), with: self, afterDelay: 0.1)
-        }
+        let user = Auth.auth().currentUser?.email
+        print(user)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    @objc func navigatevc(){
-        let vc = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
-        self.present(vc, animated: true, completion: nil)
-        
     }
     
     @IBAction func Login(_ sender:UIButton){

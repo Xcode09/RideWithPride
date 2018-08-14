@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
          let key = "AIzaSyBtrl9XeADBO_6orUSZGK26Nv9AOiALunU"
         GMSServices.provideAPIKey(key)
         GMSPlacesClient.provideAPIKey(key)
+        
         return true
     }
 
@@ -42,9 +43,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        guard let email = Auth.auth().currentUser?.email else {return}
+        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
+            sanpshot.ref.removeValue()
+            Database.database().reference().child("loaction").removeAllObservers()
+        do{
+            try Auth.auth().signOut()
+        }catch{
+            print("Error")
+        }
     }
 
 
+}
 }
 

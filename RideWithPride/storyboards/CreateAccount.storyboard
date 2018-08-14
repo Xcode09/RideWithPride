@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hxR-5L-w6x">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hxR-5L-w6x">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,18 +16,18 @@
             <objects>
                 <viewController storyboardIdentifier="Ride" id="hxR-5L-w6x" customClass="createAccountRiderView" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vqE-Cw-8ZU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RideWithPride" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="en8-Yp-gj3">
-                                <rect key="frame" x="16" y="65" width="288" height="52"/>
+                                <rect key="frame" x="16" y="65" width="343" height="52"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="30"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MlG-N3-q3p">
-                                <rect key="frame" x="35" y="159" width="250" height="250"/>
+                                <rect key="frame" x="62.5" y="208.5" width="250" height="250"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XbI-uA-GFq">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="55.5"/>
@@ -71,7 +72,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNZ-6g-AsX">
-                                <rect key="frame" x="16" y="446" width="105" height="102"/>
+                                <rect key="frame" x="16" y="545" width="105" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login">
@@ -98,65 +99,75 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ec-RX-oTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-426" y="-1654"/>
+            <point key="canvasLocation" x="-1508" y="-1718"/>
         </scene>
         <!--Call Ride View Controller-->
         <scene sceneID="L7e-SR-fQy">
             <objects>
                 <viewController storyboardIdentifier="Callride" id="AYN-CR-1ML" customClass="CallRideViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sEo-dY-Avq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="WlD-I7-wdU">
-                                <rect key="frame" x="16" y="507" width="288" height="41"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Piv-Fe-mfb">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="41"/>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="Call a Ride"/>
-                                        <connections>
-                                            <action selector="callaride:" destination="AYN-CR-1ML" eventType="touchUpInside" id="chh-el-Ala"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toi-oY-iRS">
+                                <rect key="frame" x="0.0" y="47" width="205" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Sre-Qp-T4f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Cancel Ride"/>
+                                <connections>
+                                    <action selector="CancelRide:" destination="AYN-CR-1ML" eventType="touchUpInside" id="fzK-wQ-yNi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Piv-Fe-mfb">
+                                <rect key="frame" x="16" y="577" width="343" height="70"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="wDT-li-rRY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Call a Ride"/>
+                                <connections>
+                                    <action selector="callaride:" destination="AYN-CR-1ML" eventType="touchUpInside" id="TnB-85-tS5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MOn-Db-wcW" firstAttribute="bottom" secondItem="WlD-I7-wdU" secondAttribute="bottom" constant="20" id="2bP-rm-E7K"/>
-                            <constraint firstItem="MOn-Db-wcW" firstAttribute="trailing" secondItem="WlD-I7-wdU" secondAttribute="trailing" constant="16" id="HGO-39-ID3"/>
-                            <constraint firstAttribute="bottom" secondItem="WlD-I7-wdU" secondAttribute="bottom" constant="20" symbolic="YES" id="ufo-Ac-drn"/>
-                            <constraint firstItem="WlD-I7-wdU" firstAttribute="leading" secondItem="MOn-Db-wcW" secondAttribute="leading" constant="16" id="v3e-sS-4fc"/>
+                            <constraint firstItem="MOn-Db-wcW" firstAttribute="trailing" secondItem="toi-oY-iRS" secondAttribute="trailing" constant="170" id="Fob-sQ-5TW"/>
+                            <constraint firstItem="Piv-Fe-mfb" firstAttribute="leading" secondItem="sEo-dY-Avq" secondAttribute="leadingMargin" id="GV3-qx-1Ed"/>
+                            <constraint firstItem="Piv-Fe-mfb" firstAttribute="trailing" secondItem="sEo-dY-Avq" secondAttribute="trailingMargin" id="Rk4-fk-YYx"/>
+                            <constraint firstItem="toi-oY-iRS" firstAttribute="top" secondItem="MOn-Db-wcW" secondAttribute="top" constant="27" id="azq-Pp-rQp"/>
+                            <constraint firstAttribute="bottom" secondItem="Piv-Fe-mfb" secondAttribute="bottom" constant="20" symbolic="YES" id="xJA-25-5tX"/>
+                            <constraint firstItem="toi-oY-iRS" firstAttribute="leading" secondItem="sEo-dY-Avq" secondAttribute="leading" id="yCD-0P-QdJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MOn-Db-wcW"/>
                     </view>
                     <navigationItem key="navigationItem" id="hqc-hI-lho"/>
                     <connections>
+                        <outlet property="CancelRide" destination="toi-oY-iRS" id="3V4-8F-3Ij"/>
                         <outlet property="btn" destination="Piv-Fe-mfb" id="PRQ-Sw-1PC"/>
-                        <outlet property="stack" destination="WlD-I7-wdU" id="Rlt-2M-aYN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kh-zg-Lrb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="338" y="-1654"/>
+            <point key="canvasLocation" x="-692" y="-1719.4902548725638"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="E1Y-aJ-GCo">
             <objects>
                 <tableViewController id="E7o-el-FB8" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Yd-ks-7D8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hvo-QX-SOr">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvo-QX-SOr" id="vG0-ln-IAn">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

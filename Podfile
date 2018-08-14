@@ -8,11 +8,10 @@ target 'RideWithPride' do
   use_frameworks!
 
   # Pods for RideWithPride
-  pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
-  pod 'Firebase/Storage'
-	pod 'GooglePlaces'
+
+pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
 

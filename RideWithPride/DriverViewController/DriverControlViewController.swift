@@ -7,44 +7,62 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
+import GooglePlaces
 import FirebaseDatabase
+import CoreLocation
 import FirebaseAuth
-class DriverControlViewController: UIViewController,CLLocationManagerDelegate {
-    var Driverlocation = CLLocationCoordinate2D()
-    var LocationManager = CLLocationManager()
-    lazy var map:MKMapView={
-        var map = MKMapView()
-        map.showsCompass = true
-        map.isScrollEnabled = true
-        map.showsBuildings = true
-        map.showsUserLocation = true
+class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,RiderDelegate {
+    @IBOutlet weak var Directionbtn:UIButton!
+    lazy var Driverlocation = CLLocationCoordinate2D()
+    lazy var LocationManager = CLLocationManager()
+    lazy var userlocation = CLLocation()
+    lazy var cityofDriver = String()
+    lazy var polyline = GMSPolyline()
+    lazy var points = String()
+    lazy var map:GMSMapView={
+        var map = GMSMapView(frame: .zero)
+        map.isMyLocationEnabled = true
         map.translatesAutoresizingMaskIntoConstraints=false
         return map
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        Directionbtn.isHidden = true
+        self.view.isUserInteractionEnabled = true
         MapConstraints()
         setLoation()
         ridersRequests()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        ridersRequests()
+        MapConstraints()
+    }
     private func MapConstraints(){
+        map.delegate = self
+        map.isUserInteractionEnabled=true
+        map.settings.scrollGestures=true
+        map.settings.myLocationButton=true
+        map.settings.indoorPicker=true
+        map.settings.compassButton=true
         self.view.insertSubview(map, at: 0)
         map.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
         map.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
         map.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
         map.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
     }
-    @IBAction func AcceptRide(_ sender:UIButton){
+    @IBAction func Directions(_ sender:UIButton){
+        DrawRoute(Driverlocation: Driverlocation, location: userlocation)
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locatio = locations.last else {return}
         let manager = locatio.coordinate
         let coordinate = CLLocationCoordinate2D(latitude: manager.latitude, longitude: manager.longitude)
         Driverlocation = coordinate
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        map.setRegion(region, animated: true)
-        annotations()
+        let region = GMSCameraPosition.camera(withTarget: coordinate, zoom: 15)
+        map.camera = region
+        self.map.clear()
+        self.LocationManager.stopUpdatingLocation()
     }
     func setLoation(){
         LocationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -55,68 +73,89 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate {
         LocationManager.pausesLocationUpdatesAutomatically = false
         LocationManager.startUpdatingLocation()
     }
-    private func annotations(){
-        let usrannotion = MKPointAnnotation()
-        usrannotion.title = "My cuurent loaction"
-        usrannotion.coordinate = Driverlocation
-        map.addAnnotations([usrannotion])
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        reverseGeocodeCoordinate(position.target)
     }
-    private func ridersRequests(){
-        Riders.AllRides(compilation: { (rounded,email,location) in
-            let driverclplacemark = MKPlacemark(coordinate: self.Driverlocation)
-            let riderclplace = MKPlacemark(coordinate: location.coordinate)
-            if driverclplacemark.locality == riderclplace.locality {
-                let alert = ExtraThings.ErrorAlertShow(Title: email, Message: "I want to a Ride ")
-                alert.addAction(UIAlertAction(title: "Accept the Ride", style: UIAlertActionStyle.default, handler: { (alert) in
-                    self.UpdateRide(email: email, location: location)
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }else{
-                print("location is different")
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        print("MOve")
+       
+    }
+    private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        // 1
+        let geocoder = GMSGeocoder()
+        
+        // 2
+        geocoder.reverseGeocodeCoordinate(Driverlocation) { response, error in
+            guard let address = response?.firstResult(), let lines = address.lines else {
+                return
             }
             
+            // 3
+            let marker = GMSMarker(position: address.coordinate)
+            marker.title = address.country
+            marker.snippet = address.administrativeArea
+            guard let city = address.locality else {return}
+            print(city)
+            self.cityofDriver = city
+            marker.map = self.map
+            
+            // 4
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    private func ridersRequests(){
+        Riders.AllRides(compilation: { (rounded,location) in
+            GMSGeocoder().reverseGeocodeCoordinate(location.coordinate, completionHandler: { (respone, error) in
+                if error != nil {}
+                else{
+                    guard let address = respone?.firstResult() else {return}
+                    print()
+                    if  address.locality == self.cityofDriver {
+                        let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "riders")as! CustompopViewController
+                        vc.DriverLocation = self.Driverlocation
+                        vc.delegate=self
+                        self.userlocation = location
+                        vc.city = address.subLocality!
+                        self.present(vc, animated: true, completion: nil)
+                    }else{
+                        print("location is different")
+                    }
+                }
+            })
         }, DriverLocation: Driverlocation)
         
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        LocationManager.stopUpdatingLocation()
+    func Cancelride() {
+        print("Ridecancel")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cancel"), object: nil)
     }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        LocationManager.startUpdatingLocation()
+    func AcceptRide(_ email: String) {
+        print(email,userlocation)
+        UpdateRide(email: email, location: userlocation)
+        Directionbtn.isHidden = false
     }
+    func UpdateRide(email:String,location:CLLocation){
+        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { (DataSnapshot) in
+            DataSnapshot.ref.updateChildValues(["Drilati" : self.Driverlocation.latitude,"log":self.Driverlocation.longitude])
+            Database.database().reference().child("loaction").removeAllObservers()
+        })
+        self.userlocation = location
+    }
+    private func DrawRoute(Driverlocation:CLLocationCoordinate2D,location:CLLocation){
+        print(Driverlocation)
+        print(location)
+                        let path = GMSMutablePath()
+                        path.add(Driverlocation)
+                        path.add(location.coordinate)
+                        let polyline = GMSPolyline(path: path)
+            polyline.map = nil
+        map.clear()
+                        polyline.strokeColor = .red
+                        polyline.strokeWidth = 8
+                        polyline.map = self.map
+                }
     
-    private func UpdateRide(email:String,location:CLLocation){
-    Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { (DataSnapshot) in
-    DataSnapshot.ref.updateChildValues(["Drilati" : self.Driverlocation.latitude,"log":self.Driverlocation.longitude])
-    Database.database().reference().child("loaction").removeAllObservers()
-    })
-        
-    ///Directions Show
-        
-    let sourcedes = CLLocationCoordinate2D(latitude: Driverlocation.latitude, longitude: Driverlocation.longitude)
-    let destination = location.coordinate
-    let MKSoucreMark = MKPlacemark(coordinate: sourcedes)
-    let MKDesMark = MKPlacemark(coordinate: destination)
-        let item = MKMapItem(placemark: MKSoucreMark)
-        let desitem = MKMapItem(placemark: MKDesMark)
-    let directionresquest = MKDirectionsRequest()
-        directionresquest.source = item
-        directionresquest.destination = desitem
-        directionresquest.transportType = .automobile
-    let  directions = MKDirections(request: directionresquest)
-        directions.calculate { (respone , error) in
-            if error != nil{
-                let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
-                self.present(alert, animated: false, completion: nil)
-                
-            }
-            guard let routes = respone?.routes[0] else {
-                print("Error in Routes ")
-                return
-            }
-            self.map.add((routes.polyline), level: .aboveRoads)
-            let rectmap = routes.polyline.boundingMapRect
-            self.map.setRegion(MKCoordinateRegionForMapRect(rectmap), animated: true)
-        }
-    }
+    
 }

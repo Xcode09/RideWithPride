@@ -75,9 +75,6 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
         self.emailtextfield.delegate = self
         self.Passwordtextfield.delegate = self
          KeyboardManagement()
-        if Auth.auth().currentUser != nil {
-            perform(#selector(navigatevc), with: self, afterDelay: 0.3)
-        }
         activity?.isHidden = true
         logn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         createbtin.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
@@ -86,11 +83,6 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
         createbtin.layer.contentsScale = 10
         createbtin.layer.cornerRadius = 10
     }
-    @objc func navigatevc(){
-        let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "DR")
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
