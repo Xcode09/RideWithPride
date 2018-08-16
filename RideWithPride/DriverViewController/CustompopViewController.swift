@@ -19,20 +19,32 @@ protocol Distance {
 class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var popview : UITableView!
+    @IBOutlet weak var activity : UIActivityIndicatorView!
     lazy var DriverLocation=CLLocationCoordinate2D()
     lazy var city = String()
     lazy var email = String()
     var list = [DataSnapshot]()
     var delegate:RiderDelegate?
     var distance:Distance?
+    lazy var distancess=Double()
     override func viewDidLoad() {
         super.viewDidLoad()
+       popview.layer.cornerRadius = 10
+        popview.layer.masksToBounds = true
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        activity.startAnimating()
         Database.database().reference().child("loaction").observe(.childAdded) { (data) in
+            print(data)
             self.list.append(data)
             self.popview.reloadData()
         }
-       popview.layer.cornerRadius = 10
-        popview.layer.masksToBounds = true
+        Riders.AllRides(compilation: { (double, location) in
+            self.distancess = double
+            
+        }, DriverLocation: self.DriverLocation)
+        
+            self.popview.reloadData()
     }
     @IBAction func dissmiss(_ sender:UIButton){
         self.dismiss(animated: true, completion: nil)
@@ -55,12 +67,16 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
                 
             }
             
-            cell.textLabel?.text = ema
-            print(ema)
-            email = ema
-            Riders.AllRides(compilation: { (double, location) in
-                cell.detailTextLabel?.text = "\(double)Location is \(self.city)"
-            }, DriverLocation: DriverLocation)
+            DispatchQueue.main.async {
+                cell.textLabel?.text = ema
+                cell.detailTextLabel?.text = "Rider is \(String(describing: self.distancess)) Km Away"
+            }
+            activity.stopAnimating()
+            
+                self.email = ema
+            
+           
+            
         }
         return cell
     }
@@ -82,7 +98,9 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
                     return
                 }
             self.delegate?.AcceptRide(ema)
+                self.list.remove(at: indexPath.row)
             self.distance?.ShowDistance()
+            tableView.reloadData()
             self.dismiss(animated: true, completion: nil)
         }
         action.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())

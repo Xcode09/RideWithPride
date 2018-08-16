@@ -74,6 +74,8 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     fileprivate func ViewDidLoadthings() {
         self.emailtextfield.delegate = self
         self.Passwordtextfield.delegate = self
+        emailtextfield.SetImage(imageName: "profile")
+        Passwordtextfield.SetImage(imageName: "key")
          KeyboardManagement()
         activity?.isHidden = true
         logn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())

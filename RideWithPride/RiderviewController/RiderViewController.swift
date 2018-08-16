@@ -14,16 +14,22 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var activity : UIActivityIndicatorView!
     @IBOutlet weak var createbuttons : UIButton!
     @IBOutlet weak var logbuttons : UIButton!
+    @IBOutlet weak var ResetPassbuttons : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegates
         self.emailtextfield.delegate = self
+        emailtextfield.SetImage(imageName: "profile")
         self.Passwordtextfield.delegate = self
+        Passwordtextfield.SetImage(imageName: "key")
         activity?.isHidden = true
-        createbuttons.layer.cornerRadius = 10
+        createbuttons.layer.cornerRadius = 5
         createbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         logbuttons.layer.cornerRadius = 10
+        logbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
+        ResetPassbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
+        ResetPassbuttons.layer.cornerRadius = 10
         
     }
     override func viewWillAppear(_ animated: Bool) {

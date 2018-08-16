@@ -14,12 +14,14 @@ import CoreLocation
 import FirebaseAuth
 class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,RiderDelegate {
     @IBOutlet weak var Directionbtn:UIButton!
+    @IBOutlet weak var ShowRides:UIButton!
     lazy var Driverlocation = CLLocationCoordinate2D()
     lazy var LocationManager = CLLocationManager()
     lazy var userlocation = CLLocation()
     lazy var cityofDriver = String()
     lazy var polyline = GMSPolyline()
     lazy var points = String()
+    lazy var addressofRider = String()
     lazy var map:GMSMapView={
         var map = GMSMapView(frame: .zero)
         map.isMyLocationEnabled = true
@@ -32,7 +34,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         self.view.isUserInteractionEnabled = true
         MapConstraints()
         setLoation()
-        ridersRequests()
+        //ridersRequests()
     }
     override func viewWillAppear(_ animated: Bool) {
         ridersRequests()
@@ -42,7 +44,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         map.delegate = self
         map.isUserInteractionEnabled=true
         map.settings.scrollGestures=true
-        map.settings.myLocationButton=true
+        //map.settings.myLocationButton=true
         map.settings.indoorPicker=true
         map.settings.compassButton=true
         self.view.insertSubview(map, at: 0)
@@ -80,6 +82,8 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         print("MOve")
        
     }
+    var selectimage=true
+    
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
         // 1
         let geocoder = GMSGeocoder()
@@ -94,6 +98,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
             let marker = GMSMarker(position: address.coordinate)
             marker.title = address.country
             marker.snippet = address.administrativeArea
+            marker.icon = #imageLiteral(resourceName: "icon-1")
             guard let city = address.locality else {return}
             print(city)
             self.cityofDriver = city
@@ -106,35 +111,30 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         }
     }
     private func ridersRequests(){
+
         Riders.AllRides(compilation: { (rounded,location) in
             GMSGeocoder().reverseGeocodeCoordinate(location.coordinate, completionHandler: { (respone, error) in
                 if error != nil {}
                 else{
                     guard let address = respone?.firstResult() else {return}
-                    print()
-                    if  address.locality == self.cityofDriver {
-                        let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "riders")as! CustompopViewController
-                        vc.DriverLocation = self.Driverlocation
-                        vc.delegate=self
-                        self.userlocation = location
-                        vc.city = address.subLocality!
-                        self.present(vc, animated: true, completion: nil)
-                    }else{
-                        print("location is different")
+                    if let adres = address.locality{
+                          self.addressofRider = adres
                     }
+                    self.userlocation = location
                 }
             })
         }, DriverLocation: Driverlocation)
-        
+
     }
     func Cancelride() {
         print("Ridecancel")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cancel"), object: nil)
     }
     func AcceptRide(_ email: String) {
-        print(email,userlocation)
+        guard let auth = Auth.auth().currentUser?.email else {return}
         UpdateRide(email: email, location: userlocation)
         Directionbtn.isHidden = false
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Acc"), object: nil, userInfo: ["email" : auth])
     }
     func UpdateRide(email:String,location:CLLocation){
         Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { (DataSnapshot) in
@@ -155,7 +155,15 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
                         polyline.strokeColor = .red
                         polyline.strokeWidth = 8
                         polyline.map = self.map
-                }
+        }
+    @IBAction func ShowRides(_ sender:UIButton){
+        if addressofRider == cityofDriver{
+            let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "riders")as! CustompopViewController
+            vc.delegate=self
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+    }
     
     
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="coH-as-mJz">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,16 +16,24 @@
             <objects>
                 <viewController storyboardIdentifier="DR" id="coH-as-mJz" customClass="DriverControlViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xDJ-Bi-lSN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Xa-iX-EV2">
-                                <rect key="frame" x="8" y="686" width="398" height="30"/>
+                                <rect key="frame" x="8" y="617" width="359" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Directions"/>
                                 <connections>
                                     <action selector="Directions:" destination="coH-as-mJz" eventType="touchUpInside" id="Hv2-YC-Fbp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezG-L6-e2D">
+                                <rect key="frame" x="295" y="537" width="64" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="Rider"/>
+                                <connections>
+                                    <action selector="ShowRides:" destination="coH-as-mJz" eventType="touchUpInside" id="ZWA-zZ-zER"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -34,40 +42,46 @@
                     </view>
                     <connections>
                         <outlet property="Directionbtn" destination="8Xa-iX-EV2" id="oSq-5b-dC7"/>
+                        <outlet property="ShowRides" destination="ezG-L6-e2D" id="IcD-Zq-iNU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evf-Ws-fSm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2636" y="-2391"/>
+            <point key="canvasLocation" x="2636" y="-2391.4542728635683"/>
         </scene>
         <!--Custompop View Controller-->
         <scene sceneID="XKp-qc-pXx">
             <objects>
                 <viewController storyboardIdentifier="riders" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="TPV-VC-Vkk" customClass="CustompopViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZC2-9r-ZLg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bDQ-81-kgR">
-                                <rect key="frame" x="20" y="126" width="374" height="403"/>
+                                <rect key="frame" x="16" y="126" width="343" height="334"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="cgK-IY-7HD">
+                                    <rect key="frame" x="0.0" y="97" width="343" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </activityIndicatorView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="uUe-FB-BRR" detailTextLabel="D4X-a7-745" rowHeight="69" style="IBUITableViewCellStyleSubtitle" id="5Pm-fQ-xff">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="69"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Pm-fQ-xff" id="txc-e1-yRV">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uUe-FB-BRR">
-                                                    <rect key="frame" x="20.000000000000004" y="14.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <rect key="frame" x="15" y="14" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D4X-a7-745">
-                                                    <rect key="frame" x="19.999999999999996" y="38.333333333333329" width="32.666666666666664" height="14.333333333333334"/>
+                                                    <rect key="frame" x="15" y="37.5" width="33" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -83,7 +97,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Grg-ed-KBF">
-                                <rect key="frame" x="66" y="566" width="267" height="61"/>
+                                <rect key="frame" x="66" y="497" width="228" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
@@ -91,7 +105,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Riders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOk-rn-rNE">
-                                <rect key="frame" x="16" y="31" width="382" height="54"/>
+                                <rect key="frame" x="16" y="31" width="343" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -115,6 +129,7 @@
                         <viewLayoutGuide key="safeArea" id="hAb-4W-WAk"/>
                     </view>
                     <connections>
+                        <outlet property="activity" destination="cgK-IY-7HD" id="VZL-mu-TQ1"/>
                         <outlet property="popview" destination="bDQ-81-kgR" id="Oh0-zR-qRM"/>
                     </connections>
                 </viewController>
@@ -123,4 +138,7 @@
             <point key="canvasLocation" x="3378.2608695652175" y="-2393.4782608695655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Rider" width="64" height="64"/>
+    </resources>
 </document>

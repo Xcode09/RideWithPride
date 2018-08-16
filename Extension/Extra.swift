@@ -28,6 +28,15 @@ extension UIImageView{
     }
     
 }
+extension UITextField{
+    func SetImage(imageName:String){
+        let view = UIImageView(frame: CGRect(x: 5, y: 0, width: 20, height: 20))
+        view.image = UIImage(named: imageName)
+        self.leftView = view
+        self.contentMode = .scaleAspectFit
+        self.leftViewMode = .always
+    }
+}
 extension RiderViewController{
     func ClearTextfeild(){
         emailtextfield.text  = ""

@@ -83,6 +83,11 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
             let alert = ExtraThings.ErrorAlertShow(Title: "Cancel", Message: "Driver Cancel Your Request")
             self.present(alert, animated: true, completion: nil)
         }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Acc"), object: nil, queue: OperationQueue.main) { (noti) in
+            guard let info = noti.userInfo!["email"] as? String else{return}
+            let alert = ExtraThings.ErrorAlertShow(Title: "Driver Accept a Ride", Message: info)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     func setLoation(){
         LocationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -137,6 +142,12 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
             let Values : [String:Any] = ["email":email,"lati":userloaction?.latitude ?? "","long":userloaction?.longitude ?? ""]
             let ref = Database.database().reference().child("loaction").childByAutoId()
             ref.setValue(Values)
+        UIView.animate(withDuration: 0.5) {
+            self.btn.isHidden=true
+            self.CancelRide.isHidden=false
+            self.viewDidLayoutSubviews()
+        }
+        
         isSelect = true
         UserDefaults.standard.set(isSelect, forKey: "tr")
         }
@@ -146,6 +157,12 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
             sanpshot.ref.removeValue()
             Database.database().reference().child("loaction").removeAllObservers()
         }
+        UIView.animate(withDuration: 0.5) {
+            self.btn.isHidden=false
+            self.CancelRide.isHidden=true
+            self.viewDidLayoutSubviews()
+        }
+        
         isSelect=false
         UserDefaults.standard.set(isSelect, forKey: "tr")
 }

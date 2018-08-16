@@ -23,7 +23,7 @@
         <!--Controller-->
         <scene sceneID="CzR-4g-t5E">
             <objects>
-                <viewController storyboardIdentifier="Ridervc" id="Y2b-dE-YJ9" customClass="VRController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Ridervc" modalTransitionStyle="crossDissolve" id="Y2b-dE-YJ9" customClass="VRController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E3F-VI-v5y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,7 +94,7 @@
         <!--View Controller-->
         <scene sceneID="KZs-1g-1RV">
             <objects>
-                <viewController storyboardIdentifier="Drivervc" id="k11-93-mWk" customClass="VDViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Drivervc" modalTransitionStyle="crossDissolve" id="k11-93-mWk" customClass="VDViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Jh-vD-4g9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
