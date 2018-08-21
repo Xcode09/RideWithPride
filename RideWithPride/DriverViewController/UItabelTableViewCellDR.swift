@@ -13,7 +13,7 @@ import CoreLocation
 protocol alerts: class {
     func presentAlert(title:String, message:String)
     func BacktoLogin()
-    func presentStoryboard(ViewController:UIViewController)
+    func presentStoryboard()
     func showactivity()
 }
 class UItabelTableViewCellDR: UITableViewCell,CLLocationManagerDelegate {
@@ -62,6 +62,7 @@ class UItabelTableViewCellDR: UITableViewCell,CLLocationManagerDelegate {
         loaction = loon
         
     }
+    
     private func loginfor(){
                 guard let name = Name.text else{return}
                 guard let cnic = CNIC.text else{return}
@@ -78,10 +79,17 @@ class UItabelTableViewCellDR: UITableViewCell,CLLocationManagerDelegate {
                             self.delegate?.presentAlert(title: "Error", message: (error?.localizedDescription)!)
                             
                         }else{
-                            self.SaveRegisteration(with: user!, name: name, cnic: cnic, address: adre, phone: phone)
-                            let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "DR")
-                                self.delegate?.presentStoryboard(ViewController: vc)
-                            self.istrue = true
+                Auth.auth().currentUser?.sendEmailVerification(completion: { (errror) in
+                                if errror != nil{
+                                    print("error")
+                                }else{
+                                    self.SaveRegisteration(with: user!, name: name, cnic: cnic, address: adre, phone: phone)
+                                    self.delegate?.presentStoryboard()
+                            
+                                    self.istrue = true
+                                    
+                                }
+                            })
                         }
                     }
         

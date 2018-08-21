@@ -12,9 +12,13 @@ import CoreLocation
 protocol RiderDelegate {
     func AcceptRide(_ email:String)
     func Cancelride()
+   
 }
 protocol Distance {
     func ShowDistance()
+}
+protocol AcceptRiders {
+    func AlertTOrider()
 }
 class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -26,6 +30,7 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
     var list = [DataSnapshot]()
     var delegate:RiderDelegate?
     var distance:Distance?
+    var acceptDelegate:AcceptRiders?
     lazy var distancess=Double()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +71,6 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
                 return UITableViewCell()
                 
             }
-            
             DispatchQueue.main.async {
                 cell.textLabel?.text = ema
                 cell.detailTextLabel?.text = "Rider is \(String(describing: self.distancess)) Km Away"
@@ -98,8 +102,9 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
                     return
                 }
             self.delegate?.AcceptRide(ema)
-                self.list.remove(at: indexPath.row)
+            self.list.remove(at: indexPath.row)
             self.distance?.ShowDistance()
+                self.acceptDelegate?.AlertTOrider()
             tableView.reloadData()
             self.dismiss(animated: true, completion: nil)
         }

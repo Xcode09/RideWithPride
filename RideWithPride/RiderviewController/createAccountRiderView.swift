@@ -25,7 +25,18 @@ class createAccountRiderView: UIViewController {
         createbt.layer.cornerRadius = 8
         createbt.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         Delegatesoftextfield()
+    NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
+            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+            print(noti)
+            self.view.frame.origin.y = -140
         
+    }
+        NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (noti) in
+            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+            self.view.frame.origin.y = 0
+            
+            
+        }
     }
 
     
@@ -52,13 +63,19 @@ class createAccountRiderView: UIViewController {
                 if error != nil{
                     self.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
                 }else{
+                    Auth.auth().currentUser?.sendEmailVerification(completion: { (errror) in
+                        if errror != nil{
+                            print("error")
+                        }else{
+                                                            self.SaveInDatabase(with: user!, with: text)
+                                ExtraThings.Cleartext(NameField: self.Nametextfield, passwordfiled: self.Emailtextfield,self.Passwordtextfield)
+                               self.dismiss(animated: true, completion: nil)
+                            
+                        }
+                    })
                     
-                    self.SaveInDatabase(with: user!, with: text)
-                    ExtraThings.Cleartext(NameField: self.Nametextfield, passwordfiled: self.Emailtextfield,self.Passwordtextfield)
-                    let callaridevc = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
-                    self.present(callaridevc, animated: true, completion: nil)
+
                 }
-                
                 
             }
         }

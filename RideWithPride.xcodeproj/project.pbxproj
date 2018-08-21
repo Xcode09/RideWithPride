@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1306D90C212AB36F006B5345 /* DriverLogoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306D90B212AB36F006B5345 /* DriverLogoutTableViewController.swift */; };
 		132972E52122BF46001442F7 /* CustompopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132972E42122BF46001442F7 /* CustompopViewController.swift */; };
 		1333E9C920F4D790005A1EDA /* place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1333E9C820F4D790005A1EDA /* place.swift */; };
 		1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1373C0DB20F372890078E73A /* CallRideViewController.swift */; };
@@ -23,6 +24,7 @@
 		1386A75E20FC99090009BBE6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1386A75D20FC99090009BBE6 /* Icon.png */; };
 		138AAC9920EFC12300E7BC65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 138AAC9820EFC12300E7BC65 /* GoogleService-Info.plist */; };
 		13AAFA1F210231A9006FDE92 /* ExtenCallRideViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AAFA1E210231A9006FDE92 /* ExtenCallRideViewcontroller.swift */; };
+		13B1CF7F2128654B008A8AFF /* LogoutRiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1CF7E2128654B008A8AFF /* LogoutRiderViewController.swift */; };
 		13B8589920F14DAF0049C026 /* Luminari.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B8589820F14DAF0049C026 /* Luminari.ttf */; };
 		13BED2C920ED45830009C3E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BED2C820ED45830009C3E2 /* AppDelegate.swift */; };
 		13BED2CB20ED45840009C3E2 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BED2CA20ED45840009C3E2 /* RiderViewController.swift */; };
@@ -51,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1306D90B212AB36F006B5345 /* DriverLogoutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLogoutTableViewController.swift; sourceTree = "<group>"; };
 		132972E42122BF46001442F7 /* CustompopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustompopViewController.swift; sourceTree = "<group>"; };
 		1333E9C820F4D790005A1EDA /* place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = place.swift; sourceTree = "<group>"; };
 		1373C0DB20F372890078E73A /* CallRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -67,6 +70,7 @@
 		1386A75D20FC99090009BBE6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		138AAC9820EFC12300E7BC65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13AAFA1E210231A9006FDE92 /* ExtenCallRideViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenCallRideViewcontroller.swift; sourceTree = "<group>"; };
+		13B1CF7E2128654B008A8AFF /* LogoutRiderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRiderViewController.swift; sourceTree = "<group>"; };
 		13B8589820F14DAF0049C026 /* Luminari.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Luminari.ttf; sourceTree = "<group>"; };
 		13BED2C520ED45830009C3E2 /* RideWithPride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideWithPride.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13BED2C820ED45830009C3E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 		1378F7C920EFB6A900BE8E30 /* RiderviewController */ = {
 			isa = PBXGroup;
 			children = (
+				13B1CF7E2128654B008A8AFF /* LogoutRiderViewController.swift */,
 				13BED2CA20ED45840009C3E2 /* RiderViewController.swift */,
 				1378F7CD20EFB76400BE8E30 /* createAccountRiderView.swift */,
 				1373C0DB20F372890078E73A /* CallRideViewController.swift */,
@@ -143,6 +148,7 @@
 		1378F7CC20EFB72C00BE8E30 /* DriverViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1306D90B212AB36F006B5345 /* DriverLogoutTableViewController.swift */,
 				132972E42122BF46001442F7 /* CustompopViewController.swift */,
 				13C4DA9320F92B7E00A1376F /* TableViewController.swift */,
 				13C4DA9120F92A6D00A1376F /* UItabelTableViewCellDR.swift */,
@@ -371,7 +377,9 @@
 				137AD6BB20F532FD007BFB22 /* Extra.swift in Sources */,
 				13AAFA1F210231A9006FDE92 /* ExtenCallRideViewcontroller.swift in Sources */,
 				138626B620EE55350028BC2F /* VDViewController.swift in Sources */,
+				13B1CF7F2128654B008A8AFF /* LogoutRiderViewController.swift in Sources */,
 				138626B220EE4FEF0028BC2F /* PageViewController.swift in Sources */,
+				1306D90C212AB36F006B5345 /* DriverLogoutTableViewController.swift in Sources */,
 				13F7021120F5004B00D4BA23 /* logsa.swift in Sources */,
 				138626B420EE55140028BC2F /* VRController.swift in Sources */,
 				1378F7CE20EFB76400BE8E30 /* createAccountRiderView.swift in Sources */,

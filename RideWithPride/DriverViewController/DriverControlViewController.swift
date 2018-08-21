@@ -15,6 +15,8 @@ import FirebaseAuth
 class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,RiderDelegate {
     @IBOutlet weak var Directionbtn:UIButton!
     @IBOutlet weak var ShowRides:UIButton!
+    
+    @IBOutlet weak var Navi: UINavigationBar!
     lazy var Driverlocation = CLLocationCoordinate2D()
     lazy var LocationManager = CLLocationManager()
     lazy var userlocation = CLLocation()
@@ -22,6 +24,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     lazy var polyline = GMSPolyline()
     lazy var points = String()
     lazy var addressofRider = String()
+    lazy var UID = String()
     lazy var map:GMSMapView={
         var map = GMSMapView(frame: .zero)
         map.isMyLocationEnabled = true
@@ -37,8 +40,17 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         //ridersRequests()
     }
     override func viewWillAppear(_ animated: Bool) {
+        guard  let vc = Auth.auth().currentUser?.uid else {return}
+        let current = Auth.auth().currentUser
+        self.UID = vc
+        if current != nil{
+            
+        }else{
+            dismiss(animated: true, completion: nil)
+        }
         ridersRequests()
         MapConstraints()
+        ShowDriverDetail(snapshotUID: UID)
     }
     private func MapConstraints(){
         map.delegate = self
@@ -55,6 +67,12 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     }
     @IBAction func Directions(_ sender:UIButton){
         DrawRoute(Driverlocation: Driverlocation, location: userlocation)
+    }
+    @IBAction func Settings(_ sender:UIBarButtonItem){
+        let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "Driverl") as!DriverLogoutTableViewController
+        vc.snapshotUID = UID
+        present(vc, animated: true, completion: nil)
+        
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locatio = locations.last else {return}
@@ -77,10 +95,15 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         reverseGeocodeCoordinate(position.target)
+        Navi.isHidden = false
+        NotificationCenter.default.addObserver(self, selector: #selector(cancel), name: NSNotification.Name(rawValue: "cancel"), object: nil)
     }
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        print("MOve")
+        Navi.isHidden = true
        
+    }
+    @objc func cancel(){
+        print("error")
     }
     var selectimage=true
     
@@ -90,17 +113,17 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         
         // 2
         geocoder.reverseGeocodeCoordinate(Driverlocation) { response, error in
-            guard let address = response?.firstResult(), let lines = address.lines else {
-                return
-            }
+            guard let address = response?.firstResult() else {return}
             
             // 3
             let marker = GMSMarker(position: address.coordinate)
             marker.title = address.country
-            marker.snippet = address.administrativeArea
-            marker.icon = #imageLiteral(resourceName: "icon-1")
             guard let city = address.locality else {return}
-            print(city)
+            guard let cityarea = address.administrativeArea else {return}
+            guard let area = address.subLocality else {return}
+            
+            marker.snippet = "City is \(String(describing: city)) and Region is \(String(describing: cityarea)) Area is \(String(describing:area))"
+            marker.icon = #imageLiteral(resourceName: "icon-1")
             self.cityofDriver = city
             marker.map = self.map
             
@@ -134,7 +157,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         guard let auth = Auth.auth().currentUser?.email else {return}
         UpdateRide(email: email, location: userlocation)
         Directionbtn.isHidden = false
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Acc"), object: nil, userInfo: ["email" : auth])
+        
     }
     func UpdateRide(email:String,location:CLLocation){
         Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { (DataSnapshot) in

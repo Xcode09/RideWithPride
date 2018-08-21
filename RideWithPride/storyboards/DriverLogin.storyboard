@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uPI-Sb-l1i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uPI-Sb-l1i">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Driver Login View Controller-->
         <scene sceneID="cbe-v0-NTt">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="uPI-Sb-l1i" customClass="DriverLoginViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Lo" modalTransitionStyle="crossDissolve" id="uPI-Sb-l1i" customClass="DriverLoginViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ibk-zx-p8U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,13 +22,13 @@
                                 <rect key="frame" x="16" y="32" width="343" height="435"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login As Driver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="CAl-WK-031">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="136"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="114"/>
                                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tster@gmail.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0rq-SL-64a">
-                                        <rect key="frame" x="0.0" y="154" width="343" height="45"/>
+                                        <rect key="frame" x="0.0" y="132" width="343" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="kvo-ln-VVX"/>
                                         </constraints>
@@ -37,16 +37,16 @@
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0OV-pt-iwG">
-                                        <rect key="frame" x="0.0" y="217" width="343" height="45"/>
+                                        <rect key="frame" x="0.0" y="195" width="343" height="45"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                     </textField>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="JSr-AV-0wb">
-                                        <rect key="frame" x="0.0" y="280" width="343" height="77"/>
+                                        <rect key="frame" x="0.0" y="258" width="343" height="21"/>
                                     </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nx0-ey-ClQ">
-                                        <rect key="frame" x="0.0" y="375" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="297" width="343" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="rrq-gx-Hbz"/>
                                         </constraints>
@@ -56,6 +56,19 @@
                                         </state>
                                         <connections>
                                             <action selector="Login:" destination="uPI-Sb-l1i" eventType="touchUpInside" id="crA-Xi-32X"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyR-na-fbi">
+                                        <rect key="frame" x="0.0" y="375" width="343" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="vMk-tu-gHn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Reset Password?">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="ResetPass:" destination="uPI-Sb-l1i" eventType="touchUpInside" id="lAI-7N-8dx"/>
                                         </connections>
                                     </button>
                                 </subviews>

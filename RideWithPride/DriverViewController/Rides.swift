@@ -45,7 +45,7 @@ extension DriverLoginViewController{
         NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
             let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
             print(noti)
-            self.view.frame.origin.y = -70
+            self.view.frame.origin.y = -130
 
 
     }

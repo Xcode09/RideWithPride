@@ -38,19 +38,20 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
         guard let email = emailtextfield.text else {return}
         guard let password = Passwordtextfield.text else{return}
         if email != "" && password != ""{
-            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                if error != nil{
-                    let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
-                    self.present(alert, animated: true, completion: nil)
-                    self.activity.stopAnimating()
-                    self.activity.isHidden = true
-                }else {
-                   let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "DR")
-                    self.activity.stopAnimating()
-                    self.activity.isHidden = true
-                    self.present(vc, animated: true)
-                }
-                
+            guard let ver = Auth.auth().currentUser?.isEmailVerified else {
+                let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: "User is not found or Not verfied")
+                self.present(alert, animated: true, completion: nil)
+                activity.stopAnimating()
+                activity.isHidden = true
+                return
+            }
+            if ver {
+                SignUi(email: email, password: password)
+            }else{
+                let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: "Email is not verified")
+                self.present(alert, animated: true, completion: nil)
+                activity.stopAnimating()
+                activity.isHidden = true
             }
         }else{
            let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: "Fields Are Empty......")
@@ -58,6 +59,43 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
             activity.stopAnimating()
             activity.isHidden = true
         }
+    }
+    private func SignUi(email:String,password:String){
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if error != nil{
+                let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
+                self.present(alert, animated: true, completion: nil)
+                self.activity.stopAnimating()
+                self.activity.isHidden = true
+            }else {
+                let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "DR")
+                self.activity.stopAnimating()
+                self.activity.isHidden = true
+                self.present(vc, animated: true)
+            }
+            
+        }
+    }
+    @IBAction func ResetPass(_ sender:UIButton){
+        let alett = ExtraThings.ErrorAlertShow(Title: "Forgot Password", Message: "Forgot Password please enter Email")
+        alett.addTextField { (text) in
+            text.placeholder = "Email"
+            
+        }
+        alett.addAction(UIAlertAction(title: "Send", style: .default, handler: { (action) in
+            let text = alett.textFields![0]
+            if text.text != nil , let te = text.text{
+                Auth.auth().sendPasswordReset(withEmail: te) { (error) in
+                    if error != nil{
+                        print("errro")
+                    }else{
+                        let alett = ExtraThings.ErrorAlertShow(Title: "OK", Message: "Link is send to that email")
+                        self.present(alett, animated: true, completion: nil)
+                    }
+                }
+            }
+        }))
+        self.present(alett, animated: true, completion: nil)
     }
     @IBAction func BackToMain(_ sender: UIBarButtonItem){
         dismiss(animated: true, completion: nil)

@@ -69,12 +69,8 @@ extension TableViewController:alerts{
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    func presentStoryboard(ViewController: UIViewController) {
-        dismiss(animated: true) {
-            self.vc = ViewController
-            self.perform(#selector(self.Navigatie), with: nil, afterDelay: 2)
-            
-        }
+    func presentStoryboard() {
+        dismiss(animated: true)
     }
     @objc func Navigatie(){
         self.present(vc!, animated: true, completion: nil)

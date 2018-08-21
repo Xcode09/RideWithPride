@@ -11,12 +11,14 @@ import GoogleMaps
 import GooglePlaces
 import FirebaseAuth
 import FirebaseDatabase
+
 class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate {
     @IBOutlet weak var stack : UIStackView!
     @IBOutlet weak var btn : UIButton!
     @IBOutlet weak var CancelRide : UIButton!
-    
     @IBOutlet weak var la: UILabel!
+    lazy var uid = String()
+    @IBOutlet weak var nav : UINavigationBar!
     /// Mark: properties
     var userloaction : CLLocationCoordinate2D?
     lazy var LocationManager = CLLocationManager()
@@ -26,7 +28,6 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     lazy var lat:CLLocationDegrees = CLLocationDegrees()
     lazy var log:CLLocationDegrees = CLLocationDegrees()
     lazy var Driverlocation = CLLocationCoordinate2D()
-    var custompop:CustompopViewController?
     var isSelect : Bool?
     lazy var map:GMSMapView={
         var map = GMSMapView()
@@ -51,43 +52,60 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let vc = Auth.auth().currentUser
+        if vc != nil{
+            
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
+        guard let ui = Auth.auth().currentUser?.uid else {
+            return
+        }
+        self.uid = ui
+        
         let issle =  UserDefaults.standard.bool(forKey: "tr")
         print(issle)
         if issle == true{
             
                 self.btn.isHidden = true
                 self.CancelRide.isHidden=false
-            UIView.animate(withDuration: 0.5) {
-                self.viewDidLayoutSubviews()
-            }
         }else{
             self.CancelRide.isHidden=true
             self.btn.isHidden=false
-            UIView.animate(withDuration: 0.5) {
-                self.viewDidLayoutSubviews()
-            }
             
         }
         setLoation()
+        GETREQUEST()
+        
+    }
+    
+    
+    func GETREQUEST(){
         Database.database().reference().child("loaction").observe(.childAdded) { (snapshot) in
             if let snas = snapshot.value as? [String:Any]{
-                guard let lati = snas["Drilati"] as? Double else{return}
-                guard let log = snas["log"] as? Double else{return}
-                let driverlocation = CLLocationCoordinate2D(latitude: lati, longitude: log)
-                let round = Riders.calculateDistance(DriverLocation: driverlocation, RiderLocation: self.userloaction!)
-                print(round)
+                if let lati = snas["Drilati"] as? Double {
+                    if let log = snas["log"] as? Double{
+                        let driverlocation = CLLocationCoordinate2D(latitude: lati, longitude: log)
+                        let alert = ExtraThings.ErrorAlertShow(Title: "Accept", Message: "Accept Your Request")
+                        alert.addAction(UIAlertAction(title: "Next", style: .default, handler: { (action) in
+                            self.drawroutebetween(driverLocation: driverlocation)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }
+                }
                 
             }
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "cancel"), object: nil, queue: OperationQueue.main) { (noti) in
-            let alert = ExtraThings.ErrorAlertShow(Title: "Cancel", Message: "Driver Cancel Your Request")
-            self.present(alert, animated: true, completion: nil)
-        }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Acc"), object: nil, queue: OperationQueue.main) { (noti) in
-            guard let info = noti.userInfo!["email"] as? String else{return}
-            let alert = ExtraThings.ErrorAlertShow(Title: "Driver Accept a Ride", Message: info)
-            self.present(alert, animated: true, completion: nil)
-        }
+    }
+    func drawroutebetween(driverLocation:CLLocationCoordinate2D){
+        let path = GMSMutablePath()
+        path.add(userloaction!)
+        path.add(driverLocation)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = .blue
+        polyline.strokeWidth = 15
+        polyline.map = self.map
     }
     func setLoation(){
         LocationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -111,12 +129,17 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         LocationManager.stopUpdatingLocation()
+        nav.isHidden = true
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         LocationManager.startUpdatingLocation()
+        nav.isHidden = false
     }
+   
+    
     
     private func annotations(){
+        map.clear()
         GMSPlacesClient().currentPlace { (placelikehood, error) in
             if error != nil{
                 print("Error")
@@ -162,10 +185,21 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
             self.CancelRide.isHidden=true
             self.viewDidLayoutSubviews()
         }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cancel"), object: nil)
         
         isSelect=false
         UserDefaults.standard.set(isSelect, forKey: "tr")
 }
+    @IBAction func show(_ sender:UIBarButtonItem){
+        performSegue(withIdentifier: "cell", sender: uid)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "cell"{
+                let vc = segue.destination as! LogoutRiderViewController
+                vc.snapshotUID = sender as! String
+            }
+
+        }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
