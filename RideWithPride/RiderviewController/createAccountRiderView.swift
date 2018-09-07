@@ -14,7 +14,6 @@ class createAccountRiderView: UIViewController {
      @IBOutlet weak var Emailtextfield:UITextField!
      @IBOutlet weak var Passwordtextfield:UITextField!
     @IBOutlet weak var createbt : UIButton!
-    
     // Mark : Regular Expression For email
     private let EmailRegex = "\\w+\\d?\\@\\w+\\.com"
     //Mark:Regular Expression for Password
@@ -25,14 +24,15 @@ class createAccountRiderView: UIViewController {
         createbt.layer.cornerRadius = 8
         createbt.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         Delegatesoftextfield()
+        Nametextfield.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        Emailtextfield.attributedPlaceholder = NSAttributedString(string: "xxxxx234@xmail.com", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        Passwordtextfield.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
     NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
-            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
-            print(noti)
             self.view.frame.origin.y = -140
         
     }
         NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (noti) in
-            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+           
             self.view.frame.origin.y = 0
             
             
@@ -103,6 +103,9 @@ class createAccountRiderView: UIViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
 }

@@ -17,28 +17,25 @@ class LogoutRiderViewController: UITableViewController{
     lazy var snapshotUID=String()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDiD")
-        print(snapshotUID)
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        ShowDetail()
-        print("view will")
         
     }
     func ShowDetail(){
-        Database.database().reference().child("user").child(snapshotUID).observe(.value) { (data) in
+        Database.database().reference().child("user").child(snapshotUID).observe(.value) { [weak self](data) in
             print(data)
             if let snap = data.value as? [String:Any]{
                 print(snap)
                 guard let name = snap["Name"] as? String else {return}
                 print(name)
-                self.Name = name
+                self?.Name = name
                 guard let Emailname = snap["email"] as? String else {return}
-                self.NameLabel.text = name
-                self.EmailAccount.text = Emailname
+                self?.NameLabel.text = name
+                self?.EmailAccount.text = Emailname
             }else{
                 print("Not Data")
             }
@@ -76,7 +73,7 @@ class LogoutRiderViewController: UITableViewController{
                             guard let emaiasd = emailtet.text else{return}
                             if emaiasd != ""{
                                 user?.updateEmail(to:emaiasd , completion: { (error) in
-                                    if let er = error{
+                                    if error != nil{
                                         print("Error in email")
                                     }else{
                                         Database.database().reference().child("user").child(self.snapshotUID).updateChildValues(["email":emaiasd])
@@ -136,7 +133,6 @@ class LogoutRiderViewController: UITableViewController{
                                     }else{
                                         do{
                                             try Auth.auth().signOut()
-                                            let vc = UIStoryboard(name: "Rider1", bundle: nil).instantiateViewController(withIdentifier: "UIViewController-BYZ-38-t0r")
                                             self.dismiss(animated: true)
                                         }catch{
                                             print("asdasdsdasdas")

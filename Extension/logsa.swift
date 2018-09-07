@@ -7,21 +7,28 @@
 //
 
 import UIKit
-import FirebaseAuth
-class logsa: UIView {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+@IBDesignable
+class DesignTextfeild:UITextField{
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var textRect = super.leftViewRect(forBounds: bounds)
+        textRect.origin.x += leftPadding
+        return textRect
     }
-    @IBAction func log(_ sender:UIButton){
-        do{
-            try Auth.auth().signOut()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Logout"), object: nil)
-        }catch{
-            print("error")
+    @IBInspectable var leftPadding: CGFloat = 0
+    @IBInspectable var leftImage: UIImage? {
+        didSet {
+            updateView()
         }
     }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    func updateView() {
+        if let image = leftImage {
+            leftViewMode = UITextFieldViewMode.always
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+            imageView.image = image
+            leftView = imageView
+        } else {
+            leftViewMode = UITextFieldViewMode.never
+            leftView = nil
+        }
     }
 }

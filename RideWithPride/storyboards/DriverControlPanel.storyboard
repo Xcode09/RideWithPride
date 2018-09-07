@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="coH-as-mJz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3mL-Zt-JCU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,29 +14,16 @@
         <!--Driver Logout Table View Controller-->
         <scene sceneID="dve-9f-S4a">
             <objects>
-                <tableViewController storyboardIdentifier="Driverl" id="0rT-iM-fEh" customClass="DriverLogoutTableViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0rT-iM-fEh" customClass="DriverLogoutTableViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CJ0-KX-zSh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="USE-mr-aYl">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Settings" id="ekF-hm-3ii">
-                                    <barButtonItem key="leftBarButtonItem" image="left-arrow" id="BKJ-RK-zT9">
-                                        <connections>
-                                            <action selector="BacKTo:" destination="0rT-iM-fEh" id="74I-46-LhE"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection id="BCh-nC-eX4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="whm-0I-480">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="whm-0I-480" id="FhM-bp-SAF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -44,8 +31,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZE-aS-3k7">
                                                     <rect key="frame" x="16" y="11" width="343" height="38"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -60,10 +46,10 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="sZE-aS-3k7" secondAttribute="trailing" id="gPM-m2-oaS"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="aaQ-2Z-QRb">
-                                        <rect key="frame" x="0.0" y="104" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aaQ-2Z-QRb" id="gVv-XS-zct">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -71,8 +57,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qoz-UZ-N3w">
                                                     <rect key="frame" x="16" y="11" width="343" height="38"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -83,10 +68,10 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="Qoz-UZ-N3w" secondAttribute="trailing" id="SIW-bK-PpT"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Rus-ho-TM9">
-                                        <rect key="frame" x="0.0" y="164" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="120" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rus-ho-TM9" id="HwS-bC-QV0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -94,9 +79,9 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62S-GM-We2">
                                                     <rect key="frame" x="16" y="11" width="343" height="38"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                     <state key="normal" title="Update Email">
-                                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="UpdateEmail:" destination="0rT-iM-fEh" eventType="touchUpInside" id="T6r-zz-pP3"/>
@@ -110,10 +95,10 @@
                                                 <constraint firstItem="62S-GM-We2" firstAttribute="leading" secondItem="HwS-bC-QV0" secondAttribute="leadingMargin" id="uyS-UH-av3"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="FNN-9Q-yij">
-                                        <rect key="frame" x="0.0" y="224" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="180" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FNN-9Q-yij" id="pZp-jo-RFy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -121,9 +106,9 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rix-Tj-79b">
                                                     <rect key="frame" x="16" y="11" width="343" height="38"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                     <state key="normal" title="Change Password">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="changePassword:" destination="0rT-iM-fEh" eventType="touchUpInside" id="bH0-tl-n0x"/>
@@ -137,10 +122,10 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="Rix-Tj-79b" secondAttribute="bottom" id="tUA-wf-gRS"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="s40-cV-DNQ">
-                                        <rect key="frame" x="0.0" y="284" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="240" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s40-cV-DNQ" id="0h7-OP-77h">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -148,9 +133,9 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-Cp-HOj">
                                                     <rect key="frame" x="16" y="11" width="343" height="38"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                     <state key="normal" title="Logout">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="Logout:" destination="0rT-iM-fEh" eventType="touchUpInside" id="TDN-9f-PYw"/>
@@ -164,7 +149,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="VY7-Cp-HOj" secondAttribute="trailing" id="fgr-Xx-85a"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -177,23 +162,22 @@
                     <connections>
                         <outlet property="EmailAccount" destination="Qoz-UZ-N3w" id="b5W-kP-RBj"/>
                         <outlet property="NameLabel" destination="sZE-aS-3k7" id="8dL-wJ-9zA"/>
-                        <outlet property="nav" destination="USE-mr-aYl" id="yyQ-5Z-Hei"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7h-gi-j2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1813.5999999999999" y="-1726.6866566716642"/>
+            <point key="canvasLocation" x="3210" y="-2394"/>
         </scene>
         <!--Driver Control View Controller-->
         <scene sceneID="6uX-o5-dkK">
             <objects>
                 <viewController storyboardIdentifier="DR" id="coH-as-mJz" customClass="DriverControlViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xDJ-Bi-lSN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Xa-iX-EV2">
-                                <rect key="frame" x="8" y="617" width="359" height="30"/>
+                                <rect key="frame" x="8" y="504" width="359" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Directions"/>
@@ -202,44 +186,38 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezG-L6-e2D">
-                                <rect key="frame" x="295" y="537" width="64" height="64"/>
+                                <rect key="frame" x="295" y="424" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="Rider"/>
                                 <connections>
                                     <action selector="ShowRides:" destination="coH-as-mJz" eventType="touchUpInside" id="ZWA-zZ-zER"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLw-Ge-0Ty">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="cHp-MK-NZp">
-                                        <barButtonItem key="rightBarButtonItem" image="cogwheel" id="mpB-Xv-aq1">
-                                            <connections>
-                                                <action selector="Settings:" destination="coH-as-mJz" id="fk5-Vf-NLH"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iBp-7a-aZV"/>
                     </view>
+                    <navigationItem key="navigationItem" id="wwA-y5-Qxm">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="RAg-eU-g5s">
+                            <connections>
+                                <action selector="Settings:" destination="coH-as-mJz" id="oXC-Uv-yu0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="Directionbtn" destination="8Xa-iX-EV2" id="oSq-5b-dC7"/>
-                        <outlet property="Navi" destination="iLw-Ge-0Ty" id="X2l-GD-DVP"/>
                         <outlet property="ShowRides" destination="ezG-L6-e2D" id="IcD-Zq-iNU"/>
+                        <segue destination="0rT-iM-fEh" kind="show" identifier="sho" id="ZAS-lo-vSY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evf-Ws-fSm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="-2394"/>
+            <point key="canvasLocation" x="2416.8000000000002" y="-2394.1529235382309"/>
         </scene>
         <!--Custompop View Controller-->
         <scene sceneID="XKp-qc-pXx">
             <objects>
-                <viewController storyboardIdentifier="riders" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="TPV-VC-Vkk" customClass="CustompopViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="riders" modalTransitionStyle="crossDissolve" id="TPV-VC-Vkk" customClass="CustompopViewController" customModule="RideWithPride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZC2-9r-ZLg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -322,12 +300,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZ0-k0-USA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2156" y="-2394"/>
+            <point key="canvasLocation" x="3924" y="-2401"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZxX-ct-EnH">
+            <objects>
+                <navigationController storyboardIdentifier="NaviDr" automaticallyAdjustsScrollViewInsets="NO" id="3mL-Zt-JCU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="5wR-Fb-FkX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="93"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="coH-as-mJz" kind="relationship" relationship="rootViewController" id="htw-Gi-x7v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y7J-fq-cR1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1756" y="-2409"/>
         </scene>
     </scenes>
     <resources>
         <image name="Rider" width="64" height="64"/>
-        <image name="cogwheel" width="32" height="32"/>
-        <image name="left-arrow" width="32" height="32"/>
     </resources>
 </document>

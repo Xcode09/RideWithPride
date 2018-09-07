@@ -11,7 +11,7 @@ import Firebase
 import CoreLocation
 protocol RiderDelegate {
     func AcceptRide(_ email:String)
-    func Cancelride()
+    
    
 }
 protocol Distance {
@@ -39,17 +39,18 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     override func viewWillAppear(_ animated: Bool) {
         activity.startAnimating()
-        Database.database().reference().child("loaction").observe(.childAdded) { (data) in
+        Database.database().reference().child("loaction").observe(.childAdded) { [weak self](data) in
             print(data)
-            self.list.append(data)
-            self.popview.reloadData()
+            self?.list.append(data)
+            self?.popview.reloadData()
         }
-        Riders.AllRides(compilation: { (double, location) in
-            self.distancess = double
+        Riders.AllRides(compilation: { [weak self](double, location) in
+            self?.distancess = double
             
         }, DriverLocation: self.DriverLocation)
         
             self.popview.reloadData()
+        
     }
     @IBAction func dissmiss(_ sender:UIButton){
         self.dismiss(animated: true, completion: nil)
@@ -71,22 +72,19 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
                 return UITableViewCell()
                 
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in 
                 cell.textLabel?.text = ema
-                cell.detailTextLabel?.text = "Rider is \(String(describing: self.distancess)) Km Away"
+                cell.detailTextLabel?.text = "Rider is \(String(describing: self?.distancess)) Km Away"
             }
             activity.stopAnimating()
             
                 self.email = ema
-            
-           
             
         }
         return cell
     }
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Cancel a Accept") { (action, view, bool) in
-            self.delegate?.Cancelride()
             self.list.remove(at: indexPath.row)
             tableView.reloadData()
         }
@@ -104,7 +102,6 @@ class CustompopViewController: UIViewController,UITableViewDelegate,UITableViewD
             self.delegate?.AcceptRide(ema)
             self.list.remove(at: indexPath.row)
             self.distance?.ShowDistance()
-                self.acceptDelegate?.AlertTOrider()
             tableView.reloadData()
             self.dismiss(animated: true, completion: nil)
         }

@@ -15,29 +15,27 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var createbuttons : UIButton!
     @IBOutlet weak var logbuttons : UIButton!
     @IBOutlet weak var ResetPassbuttons : UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegates
-        self.emailtextfield.delegate = self
-        emailtextfield.SetImage(imageName: "profile")
+       
         self.Passwordtextfield.delegate = self
-        Passwordtextfield.SetImage(imageName: "key")
         activity?.isHidden = true
-        createbuttons.layer.cornerRadius = 5
+        createbuttons.layer.cornerRadius = 15
         createbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
-        logbuttons.layer.cornerRadius = 10
+        logbuttons.layer.cornerRadius = 22
         logbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
-        ResetPassbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
+        //ResetPassbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         ResetPassbuttons.layer.cornerRadius = 10
+        emailtextfield.attributedPlaceholder =  NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        Passwordtextfield.attributedPlaceholder =  NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        let user = Auth.auth().currentUser?.email
-        print(user)
-        //Auth.auth().currentUser?.reload()
+    
         
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -49,33 +47,19 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     private func login(){
         activity.startAnimating()
         activity.isHidden = false
+        logbuttons.isHidden = true
         guard let email = emailtextfield.text else {return}
         guard let password = Passwordtextfield.text else{return}
         if email != "" && password != ""{
             // Authentication with Firebase
-            guard let verified = Auth.auth().currentUser?.isEmailVerified else {
-                ErrorAlertShow(Title: "Error ", Message: "User is Not found")
-                activity.stopAnimating()
-                activity.isHidden = true
-                return
-                
-            }
-            print(verified)
-            if verified{
-                SignI(email: email, password: password)
-            }else{
-                ErrorAlertShow(Title: "OOPS", Message: "Email is not verfied")
-                activity.stopAnimating()
-                ExtraThings.Cleartext(NameField: self.emailtextfield,passwordfiled: self.Passwordtextfield)
-                activity.isHidden = true
-         
-        }
+            SignI(email: email, password: password)
        
         }else{
             ErrorAlertShow(Title: "OOPS", Message: "Wrong Email or Password")
             activity.stopAnimating()
             ExtraThings.Cleartext(NameField: self.emailtextfield,passwordfiled: self.Passwordtextfield)
             activity.isHidden = true
+            logbuttons.isHidden = false
         }
     }
     private func SignI(email:String,password:String){
@@ -84,14 +68,18 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
                 self.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
                 self.activity.stopAnimating()
                 self.activity.isHidden = true
+                self.logbuttons.isHidden = false
                 
-            }else{
+            }else if user?.isEmailVerified == true{
                 self.activity.stopAnimating()
                 self.activity.isHidden = true
+                self.logbuttons.isHidden = false
                 ExtraThings.Cleartext(NameField: self.emailtextfield,passwordfiled: self.Passwordtextfield)
                 // Navigate to Main RidePanel
-                let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "Callride")
+                let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "NaviRide")
                 self.present(callaride, animated: true, completion: nil)
+            }else{
+                self.ErrorAlertShow(Title: "Error", Message:"Email is not verified")
             }
             
         }

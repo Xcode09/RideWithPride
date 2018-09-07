@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iCG-LH-vBk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iCG-LH-vBk">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,51 +30,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-aX-HPz">
-                                <rect key="frame" x="16" y="94" width="343" height="69"/>
-                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="50"/>
+                                <rect key="frame" x="16" y="96" width="343" height="69"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="50"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start your journey  as a Rider" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRd-ct-4lo">
-                                <rect key="frame" x="0.0" y="251" width="375" height="165"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="28"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xT7-qC-Eqc">
-                                <rect key="frame" x="58" y="583" width="259" height="52"/>
-                                <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="RhB-5u-nTZ">
+                                <rect key="frame" x="23" y="593" width="329" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="yuE-iV-ZjX"/>
+                                    <constraint firstAttribute="height" constant="54" id="i4b-nM-3Gu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="26"/>
-                                <state key="normal" title="Rider">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr9-aP-H9u">
+                                <rect key="frame" x="35" y="593" width="311" height="54"/>
                                 <connections>
-                                    <segue destination="Jfm-bN-dVd" kind="show" id="DG8-gW-N0V"/>
+                                    <segue destination="Jfm-bN-dVd" kind="show" id="nBU-Rn-Iox"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Start your jounery a" translatesAutoresizingMaskIntoConstraints="NO" id="7Ix-xH-hX6">
+                                <rect key="frame" x="0.0" y="441" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="NaK-zM-t0C"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dCB-rL-Efp" firstAttribute="trailing" secondItem="xT7-qC-Eqc" secondAttribute="trailing" constant="58" id="26J-3G-wuI"/>
-                            <constraint firstItem="xT7-qC-Eqc" firstAttribute="leading" secondItem="dCB-rL-Efp" secondAttribute="leading" constant="58" id="9VK-q9-UPc"/>
-                            <constraint firstItem="aeM-aX-HPz" firstAttribute="leading" secondItem="E3F-VI-v5y" secondAttribute="leadingMargin" id="EHK-BD-P25"/>
-                            <constraint firstItem="aeM-aX-HPz" firstAttribute="top" secondItem="dCB-rL-Efp" secondAttribute="top" constant="74" id="Qxn-80-xLc"/>
-                            <constraint firstItem="dCB-rL-Efp" firstAttribute="bottom" secondItem="xT7-qC-Eqc" secondAttribute="bottom" constant="32" id="SwM-k1-cVr"/>
-                            <constraint firstItem="aeM-aX-HPz" firstAttribute="trailing" secondItem="E3F-VI-v5y" secondAttribute="trailingMargin" id="qBE-Qx-PJX"/>
+                            <constraint firstAttribute="bottom" secondItem="7Ix-xH-hX6" secondAttribute="bottom" constant="174" id="0zX-yk-HeD"/>
+                            <constraint firstItem="RhB-5u-nTZ" firstAttribute="leading" secondItem="dCB-rL-Efp" secondAttribute="leading" constant="23" id="3Jl-fx-AeH"/>
+                            <constraint firstItem="7Ix-xH-hX6" firstAttribute="leading" secondItem="E3F-VI-v5y" secondAttribute="leading" id="7r9-BE-g3S"/>
+                            <constraint firstItem="dCB-rL-Efp" firstAttribute="trailing" secondItem="Pr9-aP-H9u" secondAttribute="trailing" constant="29" id="AXe-c6-Bla"/>
+                            <constraint firstItem="RhB-5u-nTZ" firstAttribute="bottom" secondItem="Pr9-aP-H9u" secondAttribute="bottom" id="Fzw-Np-ewK"/>
+                            <constraint firstItem="aeM-aX-HPz" firstAttribute="top" secondItem="dCB-rL-Efp" secondAttribute="top" constant="76" id="NbA-ea-GFb"/>
+                            <constraint firstItem="aeM-aX-HPz" firstAttribute="leading" secondItem="E3F-VI-v5y" secondAttribute="leadingMargin" id="Qez-9z-9FZ"/>
+                            <constraint firstItem="aeM-aX-HPz" firstAttribute="trailing" secondItem="E3F-VI-v5y" secondAttribute="trailingMargin" id="QkK-sJ-80x"/>
+                            <constraint firstAttribute="bottom" secondItem="RhB-5u-nTZ" secondAttribute="bottom" constant="20" symbolic="YES" id="Wpm-Zy-gwf"/>
+                            <constraint firstItem="7Ix-xH-hX6" firstAttribute="centerX" secondItem="aeM-aX-HPz" secondAttribute="centerX" id="cMM-Mh-tab"/>
+                            <constraint firstItem="RhB-5u-nTZ" firstAttribute="top" secondItem="Pr9-aP-H9u" secondAttribute="top" id="oRZ-Xj-OSD"/>
+                            <constraint firstItem="Pr9-aP-H9u" firstAttribute="leading" secondItem="dCB-rL-Efp" secondAttribute="leading" constant="35" id="sWm-0w-AFB"/>
+                            <constraint firstItem="7Ix-xH-hX6" firstAttribute="centerX" secondItem="RhB-5u-nTZ" secondAttribute="centerX" id="vHT-ev-Etd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dCB-rL-Efp"/>
                     </view>
-                    <connections>
-                        <outlet property="button" destination="xT7-qC-Eqc" id="vQO-I7-mTL"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIY-EM-b9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.25" y="-1159.8591549295775"/>
+            <point key="canvasLocation" x="1372.5" y="-1161.9718309859154"/>
         </scene>
         <!--Rider1-->
         <scene sceneID="qBe-45-lWe">
@@ -81,7 +83,15 @@
                 <viewControllerPlaceholder storyboardName="Rider1" id="Jfm-bN-dVd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hs6-Lo-pws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1357" y="-787"/>
+            <point key="canvasLocation" x="1356" y="-750"/>
+        </scene>
+        <!--DriverLogin-->
+        <scene sceneID="EE6-8Q-D0x">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DriverLogin" id="MIi-SJ-kyO" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aRN-Ey-Twk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1986" y="-750"/>
         </scene>
         <!--DriverLogin-->
         <scene sceneID="8b3-ul-U5t">
@@ -99,58 +109,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="SWb-sz-JpQ">
-                                <rect key="frame" x="16" y="94" width="343" height="70"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Driver" translatesAutoresizingMaskIntoConstraints="NO" id="fbN-Gc-9Dv">
+                                <rect key="frame" x="26" y="593" width="322" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="a6h-3k-ueu"/>
+                                    <constraint firstAttribute="height" constant="54" id="4EC-dZ-8Sk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="50"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Start your journey  as a Driver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-Ex-tbJ">
-                                <rect key="frame" x="0.0" y="215" width="375" height="237"/>
-                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="28"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwI-Ed-zXx">
-                                <rect key="frame" x="58" y="583" width="259" height="52"/>
-                                <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="09E-vI-M28"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="30"/>
-                                <state key="normal" title="Driver">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jB-Wm-A78">
+                                <rect key="frame" x="63" y="593" width="245" height="54"/>
                                 <connections>
-                                    <segue destination="CR5-IC-n47" kind="show" id="VeG-u4-dHx"/>
+                                    <segue destination="MIi-SJ-kyO" kind="show" id="d4A-lc-UGL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RideWithPride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="SWb-sz-JpQ">
+                                <rect key="frame" x="16" y="93" width="288" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="50"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Start your jounery q" translatesAutoresizingMaskIntoConstraints="NO" id="4TS-Rk-Nup">
+                                <rect key="frame" x="-1" y="342" width="375" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="D9T-is-klF"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="leading" secondItem="3Jh-vD-4g9" secondAttribute="leadingMargin" id="1Gz-8v-1dM"/>
-                            <constraint firstAttribute="trailing" secondItem="VcJ-Ex-tbJ" secondAttribute="trailing" id="54z-pk-6xU"/>
-                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="top" secondItem="pOi-zc-i5c" secondAttribute="top" constant="74" id="5J9-gQ-0Lx"/>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="centerY" secondItem="3Jh-vD-4g9" secondAttribute="centerY" id="8ij-lB-bpA"/>
-                            <constraint firstItem="mwI-Ed-zXx" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="58" id="In5-iJ-biH"/>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="leading" secondItem="3Jh-vD-4g9" secondAttribute="leading" id="QJx-kh-Xsy"/>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="centerX" secondItem="mwI-Ed-zXx" secondAttribute="centerX" id="TtB-nq-ctl"/>
-                            <constraint firstItem="pOi-zc-i5c" firstAttribute="bottom" secondItem="mwI-Ed-zXx" secondAttribute="bottom" constant="32" id="jTV-lO-VYd"/>
-                            <constraint firstItem="SWb-sz-JpQ" firstAttribute="centerX" secondItem="VcJ-Ex-tbJ" secondAttribute="centerX" id="tSY-q5-IWB"/>
-                            <constraint firstItem="VcJ-Ex-tbJ" firstAttribute="top" secondItem="SWb-sz-JpQ" secondAttribute="bottom" constant="51" id="wpl-wH-UuL"/>
+                            <constraint firstItem="fbN-Gc-9Dv" firstAttribute="centerX" secondItem="4TS-Rk-Nup" secondAttribute="centerX" id="7fq-z5-jR0"/>
+                            <constraint firstItem="pOi-zc-i5c" firstAttribute="trailing" secondItem="4TS-Rk-Nup" secondAttribute="trailing" constant="1" id="KyF-Y8-I0F"/>
+                            <constraint firstItem="4TS-Rk-Nup" firstAttribute="top" secondItem="3Jh-vD-4g9" secondAttribute="top" constant="342" id="Lo6-9w-URl"/>
+                            <constraint firstItem="pOi-zc-i5c" firstAttribute="trailing" secondItem="5jB-Wm-A78" secondAttribute="trailing" constant="67" id="WFS-4G-BoE"/>
+                            <constraint firstItem="fbN-Gc-9Dv" firstAttribute="bottom" secondItem="5jB-Wm-A78" secondAttribute="bottom" id="WtW-Vv-TFC"/>
+                            <constraint firstItem="fbN-Gc-9Dv" firstAttribute="top" secondItem="5jB-Wm-A78" secondAttribute="top" id="cxe-PJ-tsb"/>
+                            <constraint firstItem="fbN-Gc-9Dv" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="26" id="e84-g7-fDJ"/>
+                            <constraint firstAttribute="bottom" secondItem="fbN-Gc-9Dv" secondAttribute="bottom" constant="20" symbolic="YES" id="fcs-8T-mQA"/>
+                            <constraint firstItem="4TS-Rk-Nup" firstAttribute="leading" secondItem="3Jh-vD-4g9" secondAttribute="leadingMargin" constant="-17" id="q8e-50-oLC"/>
+                            <constraint firstItem="5jB-Wm-A78" firstAttribute="leading" secondItem="pOi-zc-i5c" secondAttribute="leading" constant="63" id="sW1-Ic-KQy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pOi-zc-i5c"/>
                     </view>
-                    <connections>
-                        <outlet property="button" destination="mwI-Ed-zXx" id="40q-XI-bok"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZQ-F3-DW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1988" y="-1160"/>
+            <point key="canvasLocation" x="1985.625" y="-1161.9718309859154"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Driver" width="213" height="55"/>
+        <image name="Logo" width="426" height="110"/>
+        <image name="Start your jounery a" width="301" height="46"/>
+        <image name="Start your jounery q" width="301" height="46"/>
+    </resources>
 </document>

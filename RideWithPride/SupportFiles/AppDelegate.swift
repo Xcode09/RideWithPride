@@ -43,18 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        guard let email = Auth.auth().currentUser?.email else {return}
-        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
-            sanpshot.ref.removeValue()
-            Database.database().reference().child("loaction").removeAllObservers()
-        do{
-            try Auth.auth().signOut()
-        }catch{
-            print("Error")
-        }
+        
     }
-
-
-}
 }
 

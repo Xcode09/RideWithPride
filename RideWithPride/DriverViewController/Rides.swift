@@ -43,14 +43,14 @@ struct Riders{
 extension DriverLoginViewController{
  func KeyboardManagement(){
         NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
-            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
-            print(noti)
-            self.view.frame.origin.y = -130
+//            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+//            print(noti)
+            self.view.frame.origin.y = -78
 
 
     }
     NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (noti) in
-        let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+//        let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
         self.view.frame.origin.y = 0
         
         

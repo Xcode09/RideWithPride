@@ -15,8 +15,6 @@ import FirebaseAuth
 class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,RiderDelegate {
     @IBOutlet weak var Directionbtn:UIButton!
     @IBOutlet weak var ShowRides:UIButton!
-    
-    @IBOutlet weak var Navi: UINavigationBar!
     lazy var Driverlocation = CLLocationCoordinate2D()
     lazy var LocationManager = CLLocationManager()
     lazy var userlocation = CLLocation()
@@ -37,7 +35,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         self.view.isUserInteractionEnabled = true
         MapConstraints()
         setLoation()
-        //ridersRequests()
+        ridersRequests()
     }
     override func viewWillAppear(_ animated: Bool) {
         guard  let vc = Auth.auth().currentUser?.uid else {return}
@@ -52,6 +50,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         MapConstraints()
         ShowDriverDetail(snapshotUID: UID)
     }
+    
     private func MapConstraints(){
         map.delegate = self
         map.isUserInteractionEnabled=true
@@ -69,10 +68,14 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         DrawRoute(Driverlocation: Driverlocation, location: userlocation)
     }
     @IBAction func Settings(_ sender:UIBarButtonItem){
-        let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "Driverl") as!DriverLogoutTableViewController
-        vc.snapshotUID = UID
-        present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: "sho", sender: UID)
         
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sho"{
+            let vc = segue.destination as! DriverLogoutTableViewController
+            vc.snapshotUID = sender as! String
+        }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locatio = locations.last else {return}
@@ -95,15 +98,10 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         reverseGeocodeCoordinate(position.target)
-        Navi.isHidden = false
-        NotificationCenter.default.addObserver(self, selector: #selector(cancel), name: NSNotification.Name(rawValue: "cancel"), object: nil)
     }
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        Navi.isHidden = true
+        
        
-    }
-    @objc func cancel(){
-        print("error")
     }
     var selectimage=true
     
@@ -135,15 +133,15 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     }
     private func ridersRequests(){
 
-        Riders.AllRides(compilation: { (rounded,location) in
-            GMSGeocoder().reverseGeocodeCoordinate(location.coordinate, completionHandler: { (respone, error) in
+        Riders.AllRides(compilation: { [weak self](rounded,location) in
+            GMSGeocoder().reverseGeocodeCoordinate(location.coordinate, completionHandler: { [weak self](respone, error) in
                 if error != nil {}
                 else{
                     guard let address = respone?.firstResult() else {return}
                     if let adres = address.locality{
-                          self.addressofRider = adres
+                        self?.addressofRider = adres
                     }
-                    self.userlocation = location
+                    self?.userlocation = location
                 }
             })
         }, DriverLocation: Driverlocation)
@@ -160,8 +158,8 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         
     }
     func UpdateRide(email:String,location:CLLocation){
-        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { (DataSnapshot) in
-            DataSnapshot.ref.updateChildValues(["Drilati" : self.Driverlocation.latitude,"log":self.Driverlocation.longitude])
+        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { [weak self](DataSnapshot) in
+            DataSnapshot.ref.updateChildValues(["Drilati" : self?.Driverlocation.latitude ?? "No value","log":self?.Driverlocation.longitude ?? "Not logi"])
             Database.database().reference().child("loaction").removeAllObservers()
         })
         self.userlocation = location
@@ -187,6 +185,8 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         }
         
     }
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
 }

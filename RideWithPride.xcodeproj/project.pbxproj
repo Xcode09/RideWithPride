@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1306D90C212AB36F006B5345 /* DriverLogoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306D90B212AB36F006B5345 /* DriverLogoutTableViewController.swift */; };
 		132972E52122BF46001442F7 /* CustompopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132972E42122BF46001442F7 /* CustompopViewController.swift */; };
-		1333E9C920F4D790005A1EDA /* place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1333E9C820F4D790005A1EDA /* place.swift */; };
 		1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1373C0DB20F372890078E73A /* CallRideViewController.swift */; };
 		13787AAF20FA18BF00E748A2 /* DriverControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */; };
 		13787AB120FA18E300E748A2 /* DriverControlPanel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */; };
@@ -55,7 +54,6 @@
 /* Begin PBXFileReference section */
 		1306D90B212AB36F006B5345 /* DriverLogoutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLogoutTableViewController.swift; sourceTree = "<group>"; };
 		132972E42122BF46001442F7 /* CustompopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustompopViewController.swift; sourceTree = "<group>"; };
-		1333E9C820F4D790005A1EDA /* place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = place.swift; sourceTree = "<group>"; };
 		1373C0DB20F372890078E73A /* CallRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRideViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		13787AAE20FA18BF00E748A2 /* DriverControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverControlViewController.swift; sourceTree = "<group>"; };
 		13787AB020FA18E300E748A2 /* DriverControlPanel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverControlPanel.storyboard; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 		1333E9C320F4BF4B005A1EDA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				1333E9C820F4D790005A1EDA /* place.swift */,
 				13F7021020F5004B00D4BA23 /* logsa.swift */,
 				137AD6BA20F532FD007BFB22 /* Extra.swift */,
 			);
@@ -384,7 +381,6 @@
 				138626B420EE55140028BC2F /* VRController.swift in Sources */,
 				1378F7CE20EFB76400BE8E30 /* createAccountRiderView.swift in Sources */,
 				13BED2CB20ED45840009C3E2 /* RiderViewController.swift in Sources */,
-				1333E9C920F4D790005A1EDA /* place.swift in Sources */,
 				13787AAF20FA18BF00E748A2 /* DriverControlViewController.swift in Sources */,
 				13D0D05A2102578800C812BD /* Rides.swift in Sources */,
 				1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */,

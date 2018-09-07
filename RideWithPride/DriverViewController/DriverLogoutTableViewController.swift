@@ -23,40 +23,36 @@ class DriverLogoutTableViewController: UITableViewController {
     lazy var log = Double()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDiD")
-        print(snapshotUID)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         ShowDetail()
-        print("view will")
         
         
     }
     func ShowDetail(){
-        Database.database().reference().child("DriverUser").child(snapshotUID).observe(.value) { (data) in
+        Database.database().reference().child("DriverUser").child(snapshotUID).observe(.value) { [weak self](data) in
             print(data)
             if let snap = data.value as? [String:Any]{
                 print(snap)
                 guard let name = snap["Name"] as? String else {return}
-                print(name)
-                self.Name = name
+                self?.Name = name
                 guard let Emailname = snap["email"] as? String else {return}
                 guard let Cnic = snap["Cnic"] as? String else {return}
                 guard let address = snap["address"] as? String else {return}
                 guard let phone = snap["phone"] as? String else {return}
                 guard let lati = snap["lati"] as? Double else {return}
                 guard let log = snap["log"] as? Double else {return}
-                self.Cnic = Cnic
-                self.address = address
-                self.phone = phone
-                self.lati = lati
-                self.log  = log
+                self?.Cnic = Cnic
+                self?.address = address
+                self?.phone = phone
+                self?.lati = lati
+                self?.log  = log
                 
-                self.NameLabel.text = self.Name
-                self.EmailAccount.text = Emailname
+                self?.NameLabel.text = self?.Name
+                self?.EmailAccount.text = Emailname
             }else{
                 print("Not Data")
             }
@@ -81,10 +77,10 @@ class DriverLogoutTableViewController: UITableViewController {
                 guard let email = emailtext.text , let pass = passtext.text else{return}
                 let user = Auth.auth().currentUser
                 let credie = EmailAuthProvider.credential(withEmail: email, password: pass)
-                user?.reauthenticate(with: credie, completion: { (error) in
+                user?.reauthenticate(with: credie, completion: { [weak self] (error) in
                     if error != nil{
                         let error = ExtraThings.ErrorAlertShow(Title: "Error", Message: String(describing: error?.localizedDescription))
-                        self.present(error, animated: true, completion: nil)
+                        self?.present(error, animated: true, completion: nil)
                     }else{
                         let updat = ExtraThings.ErrorAlertShow(Title: "New Email", Message: "please Entre New Email")
                         updat.addTextField(configurationHandler: { (text) in
@@ -97,20 +93,20 @@ class DriverLogoutTableViewController: UITableViewController {
                                 user?.updateEmail(to:emaiasd , completion: { (error) in
                                     if let er = error{
                                         let error = ExtraThings.ErrorAlertShow(Title: "Error", Message: String(describing: er.localizedDescription))
-                                        self.present(error, animated: true, completion: nil)                                    }else{
-                                        Database.database().reference().child("DriverUser").child(self.snapshotUID).updateChildValues(["email":emaiasd])
+                                        self?.present(error, animated: true, completion: nil)                                    }else{
+                                        Database.database().reference().child("DriverUser").child((self?.snapshotUID)!).updateChildValues(["email":emaiasd])
                                         do{
                                             try Auth.auth().signOut()
-                                            self.InitiateVC()
+                                            self?.InitiateVC()
                                         }catch{
                                             print("Erroro zmc ")
                                         }
-                                        self.dismiss(animated: true, completion: nil)
+                                        self?.dismiss(animated: true, completion: nil)
                                     }
                                 })
                             }
                         }))
-                        self.present(updat, animated: true, completion: nil)
+                        self?.present(updat, animated: true, completion: nil)
                     }
                 })
             }
@@ -195,7 +191,7 @@ class DriverLogoutTableViewController: UITableViewController {
         }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
+        return .default
     }
     
     

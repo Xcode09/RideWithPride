@@ -37,6 +37,12 @@ class UItabelTableViewCellDR: UITableViewCell,CLLocationManagerDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         manager.delegate = self
+        Name.attributedPlaceholder =  NSAttributedString(string: "Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        CNIC.attributedPlaceholder =  NSAttributedString(string: "CNIC", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        address.attributedPlaceholder =  NSAttributedString(string: "Address", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        phoneNO.attributedPlaceholder =  NSAttributedString(string: "Phone", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        Email.attributedPlaceholder =  NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        password.attributedPlaceholder =  NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         lognbtn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         createbtn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         lognbtn.layer.cornerRadius = 20
@@ -74,19 +80,22 @@ class UItabelTableViewCellDR: UITableViewCell,CLLocationManagerDelegate {
                 let isphone = createAccountRiderView.isEmailValide(EmailText: phone, regularExp: cnicregx)
                 guard let pass = password.text else{return}
                 if name != "" && cnincvalidat == true && adre != "" && isphone == true && emailvalidate == true && pass != "" {
-                    Auth.auth().createUser(withEmail: Email, password: pass) { (user, error) in
+                    Auth.auth().createUser(withEmail: Email, password: pass) { [weak self](user, error) in
                         if error != nil{
-                            self.delegate?.presentAlert(title: "Error", message: (error?.localizedDescription)!)
+                            self?.delegate?.presentAlert(title: "Error", message: (error?.localizedDescription)!)
                             
                         }else{
                 Auth.auth().currentUser?.sendEmailVerification(completion: { (errror) in
                                 if errror != nil{
                                     print("error")
                                 }else{
-                                    self.SaveRegisteration(with: user!, name: name, cnic: cnic, address: adre, phone: phone)
-                                    self.delegate?.presentStoryboard()
-                            
-                                    self.istrue = true
+                                    if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+                                        self?.SaveRegisteration(with: user!, name: name, cnic: cnic, address: adre, phone: phone)
+                                        self?.delegate?.presentStoryboard()
+                                        
+                                        self?.istrue = true
+                                    }
+                                    
                                     
                                 }
                             })

@@ -9,12 +9,10 @@
 import UIKit
 import AVKit
 class VRController: UIViewController {
-    @IBOutlet weak var button : UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let image = UIImageView().CreateImageView(Image: "Taxi")
-        button.layer.cornerRadius = 10
-        button.layer.backgroundColor = CGColor.colorForbtn()
+        let image = UIImageView().CreateImageView(Image: "1")
         self.view.insertSubview(image, at: 0)
         image.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
         image.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
