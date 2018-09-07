@@ -19,17 +19,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zRg-cv-J8y">
-                                <rect key="frame" x="16" y="36" width="288" height="370"/>
+                                <rect key="frame" x="16" y="36" width="288" height="346"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login To Rider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Na-ZI-cLq">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="41"/>
                                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="4" height="5"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C0x-ZB-iG6" customClass="DesignTextfeild" customModule="RideWithPride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="65" width="288" height="45"/>
+                                        <rect key="frame" x="0.0" y="61" width="288" height="41"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -43,7 +43,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="justified" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JZA-4D-0Nm" customClass="DesignTextfeild" customModule="RideWithPride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="288" height="45"/>
+                                        <rect key="frame" x="0.0" y="122" width="288" height="41"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,10 +57,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UBf-Kg-BL0">
-                                        <rect key="frame" x="0.0" y="195" width="288" height="45"/>
+                                        <rect key="frame" x="0.0" y="183" width="288" height="41"/>
                                     </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tP-OV-GA4">
-                                        <rect key="frame" x="0.0" y="260" width="288" height="45"/>
+                                        <rect key="frame" x="0.0" y="244" width="288" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="3JO-zg-gNY"/>
                                         </constraints>
@@ -73,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDo-pp-Y9N">
-                                        <rect key="frame" x="0.0" y="325" width="288" height="45"/>
+                                        <rect key="frame" x="0.0" y="305" width="288" height="41"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <state key="normal" title="Forgot Password">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,11 +84,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wMl-8I-4sN">
-                                <rect key="frame" x="8" y="487" width="304" height="73"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wMl-8I-4sN">
+                                <rect key="frame" x="8" y="463" width="304" height="78"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YtO-GE-2c8">
                                         <rect key="frame" x="0.0" y="0.0" width="304" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="vox-7a-TrB"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-BlackOblique" family="Avenir" pointSize="29"/>
                                         <size key="titleShadowOffset" width="2" height="4"/>
                                         <state key="normal" title="Create Account" image="create-group-button">
@@ -100,7 +103,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pua-Pg-zOo">
-                                        <rect key="frame" x="0.0" y="39" width="304" height="34"/>
+                                        <rect key="frame" x="0.0" y="39" width="304" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -129,6 +132,7 @@
                         <outlet property="Passwordtextfield" destination="JZA-4D-0Nm" id="oMr-fx-zcD"/>
                         <outlet property="ResetPassbuttons" destination="jDo-pp-Y9N" id="3Ra-1R-QUJ"/>
                         <outlet property="activity" destination="UBf-Kg-BL0" id="nCv-OO-4d9"/>
+                        <outlet property="createbuttons" destination="YtO-GE-2c8" id="wRB-t6-khy"/>
                         <outlet property="emailtextfield" destination="C0x-ZB-iG6" id="EYl-mh-jMB"/>
                         <outlet property="logbuttons" destination="1tP-OV-GA4" id="6jz-Xw-P6N"/>
                     </connections>
