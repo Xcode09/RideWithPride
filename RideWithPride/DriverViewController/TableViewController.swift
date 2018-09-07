@@ -48,7 +48,6 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UItabelTableViewCellDR
         cell.delegate = self
         Celltrue = cell.istrue
-        print(Celltrue!)
         return cell
     }
     
@@ -86,9 +85,5 @@ extension TableViewController:alerts{
         
         
     }
-    
-    
 }
-extension TableViewController{
-    
-}
+
