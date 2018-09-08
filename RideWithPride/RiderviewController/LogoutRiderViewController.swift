@@ -13,28 +13,30 @@ class LogoutRiderViewController: UITableViewController{
     
     @IBOutlet weak var NameLabel: UILabel!
     @IBOutlet weak var EmailAccount: UILabel!
+    
+    @IBOutlet weak var versionlb: UILabel!
     lazy var Name=String()
     lazy var snapshotUID=String()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let lb = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String{
+            versionlb.text = lb
+        }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        ShowDetail()
     }
     func ShowDetail(){
         Database.database().reference().child("user").child(snapshotUID).observe(.value) { [weak self](data) in
             print(data)
             if let snap = data.value as? [String:Any]{
-                print(snap)
                 guard let name = snap["Name"] as? String else {return}
-                print(name)
-                self?.Name = name
+                self?.Name = name.uppercased()
                 guard let Emailname = snap["email"] as? String else {return}
-                self?.NameLabel.text = name
+                self?.NameLabel.text = name.uppercased()
                 self?.EmailAccount.text = Emailname
             }else{
                 print("Not Data")

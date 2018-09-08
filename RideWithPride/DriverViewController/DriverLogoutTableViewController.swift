@@ -13,7 +13,9 @@ class DriverLogoutTableViewController: UITableViewController {
     
     @IBOutlet weak var NameLabel: UILabel!
     @IBOutlet weak var EmailAccount: UILabel!
-    @IBOutlet weak var nav : UINavigationBar!
+    
+    
+    @IBOutlet weak var versionlb: UILabel!
     lazy var Name=String()
     lazy var snapshotUID=String()
     lazy var Cnic = String()
@@ -23,6 +25,9 @@ class DriverLogoutTableViewController: UITableViewController {
     lazy var log = Double()
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let lb = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String{
+            self.versionlb.text = lb
+        }
         
     }
     

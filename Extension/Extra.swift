@@ -24,26 +24,32 @@ class ExtraThings:NSObject{
         filed?.text = ""
         extra?.text = ""
     }
+    typealias Compilation = ((String)->Void)
+    class func ShowDriverDetail(snapshotUID:String,ChildNode:String,compilation:@escaping Compilation){
+    Database.database().reference().child(ChildNode).child(snapshotUID).observe(.value) { (data) in
+            print(data)
+            if let snap = data.value as? [String:Any]{
+                guard let name = snap["Name"] as? String else {
+                    return
+                }
+                compilation(name)
+                
+            }else{
+                print("Not Data")
+            }
+        }
+    }
 }
 extension CGColor{
     class func colorForbtn()->CGColor{
         let color = UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 0.70).cgColor
         return color
     }
-  
-}
-extension UIButton{
-      func GradientColor(){
-        let CAGradient = CAGradientLayer()
-        CAGradient.frame = CGRect(x: 16, y: 584, width: 343, height: 55)
-        let color = UIColor(red: 44, green: 25, blue: 228, alpha: 1.0)
-        let color2 = UIColor(red: 143, green: 0, blue: 254, alpha: 1.0)
-        CAGradient.colors = [color.cgColor,color2.cgColor]
-        CAGradient.startPoint = CGPoint(x: 0.0, y: 0.95)
-        CAGradient.endPoint = CGPoint(x: 1.0, y: 0.05)
-        //CAGradient.locations = [0.0,1.0]
-        self.layer.addSublayer(CAGradient)
+    class func ColorCombination()->CGColor{
+        let color = UIColor(red: 42/255, green: 91/255, blue: 120/255, alpha: 1.0).cgColor
+        return color
     }
+  
 }
 extension UIImageView{
     func CreateImageView(Image name:String)->UIImageView{
@@ -58,22 +64,6 @@ extension UIImageView{
         return image
     }
     
-}
-extension DriverControlViewController{
-    func ShowDriverDetail(snapshotUID:String){
-        Database.database().reference().child("DriverUser").child(snapshotUID).observe(.value) { (data) in
-            print(data)
-            if let snap = data.value as? [String:Any]{
-                print(snap)
-                guard let name = snap["Name"] as? String else {return}
-                print(name)
-                self.title = name
-                guard let Emailname = snap["email"] as? String else {return}
-            }else{
-                print("Not Data")
-            }
-        }
-    }
 }
 
 extension RiderViewController{

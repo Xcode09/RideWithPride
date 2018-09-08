@@ -17,14 +17,7 @@ extension CallRideViewController{
         map.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
         map.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches Start")
-        LocationManager.stopUpdatingLocation()
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch end")
-        LocationManager.startUpdatingLocation()
-    }
+    
     
     
 }

@@ -48,14 +48,20 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         }
         ridersRequests()
         MapConstraints()
-        ShowDriverDetail(snapshotUID: UID)
+        ExtraThings.ShowDriverDetail(snapshotUID: UID, ChildNode: "DriverUser") { [weak self](name) in
+            DispatchQueue.main.async {
+                 self?.title = name
+                
+            }
+        }
+        
+        
     }
     
     private func MapConstraints(){
         map.delegate = self
         map.isUserInteractionEnabled=true
         map.settings.scrollGestures=true
-        //map.settings.myLocationButton=true
         map.settings.indoorPicker=true
         map.settings.compassButton=true
         self.view.insertSubview(map, at: 0)
@@ -103,7 +109,6 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         
        
     }
-    var selectimage=true
     
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
         // 1
@@ -147,12 +152,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         }, DriverLocation: Driverlocation)
 
     }
-    func Cancelride() {
-        print("Ridecancel")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cancel"), object: nil)
-    }
     func AcceptRide(_ email: String) {
-        guard let auth = Auth.auth().currentUser?.email else {return}
         UpdateRide(email: email, location: userlocation)
         Directionbtn.isHidden = false
         
@@ -182,6 +182,9 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
             let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "riders")as! CustompopViewController
             vc.delegate=self
             self.present(vc, animated: true, completion: nil)
+        }else{
+            let alert = ExtraThings.ErrorAlertShow(Title: "No Rides", Message: "There is not Ride Request")
+            present(alert, animated: true, completion: nil)
         }
         
     }
