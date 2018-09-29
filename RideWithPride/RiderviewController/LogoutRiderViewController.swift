@@ -158,18 +158,46 @@ class LogoutRiderViewController: UITableViewController{
     }
     
     @IBAction func Logout(_ sender: UIButton) {
-        do{
-            try Auth.auth().signOut()
-            let vc = UIStoryboard(name: "Rider1", bundle: nil).instantiateViewController(withIdentifier: "UIViewController-BYZ-38-t0r")
-            self.dismiss(animated: true) {
-                self.present(vc, animated: true, completion: nil)
+        let sheet = UIAlertController(title: "Logout", message: "Are you sure to logout", preferredStyle: .alert)
+        sheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
+            do{
+                try Auth.auth().signOut()
+                let vc = UIStoryboard(name: "Rider1", bundle: nil).instantiateViewController(withIdentifier: "UIViewController-BYZ-38-t0r")
+                self.dismiss(animated: true) {
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }catch{
+                
             }
-        }catch{
-            
-        }
+        }))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(sheet, animated: true, completion: nil)
+        
     }
+    @IBAction func deletebtn(_ sender: UIButton) {
+        let sheet = UIAlertController(title: "Delete Account", message: "it will all your data are you sure", preferredStyle: .alert)
+        sheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
+            Auth.auth().currentUser?.delete(completion: { (error) in
+                if error != nil{
+                    print(error?.localizedDescription)
+                }else{
+//                    Database.database().reference().child("user").child(snapshotUID).ad
+                }
+            })
+        }))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(sheet, animated: true, completion: nil)
+        
+    }
+
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
-    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.contentView.backgroundColor = .white
+            headerView.textLabel?.textColor = .black
+            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 25)
+        }
+    }
 }

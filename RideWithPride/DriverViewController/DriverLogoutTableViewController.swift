@@ -188,15 +188,28 @@ class DriverLogoutTableViewController: UITableViewController {
     }
     
     @IBAction func Logout(_ sender: UIButton) {
-        do{
-            try Auth.auth().signOut()
-          InitiateVC()
-        }catch{
-            
-        }
+        let sheet = UIAlertController(title: "LogOut", message: "Are you sure to logout", preferredStyle: .alert)
+        sheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
+            do{
+                try Auth.auth().signOut()
+                self.InitiateVC()
+            }catch{
+                
+            }
+        }))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(sheet, animated: true, completion: nil)
+        
     }
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
+    }
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.contentView.backgroundColor = .white
+            headerView.textLabel?.textColor = .black
+            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 25)
+        }
     }
     
     

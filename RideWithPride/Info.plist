@@ -46,6 +46,11 @@
 	<string>This app uses Loaction</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>app uses loaction</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

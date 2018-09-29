@@ -12,9 +12,7 @@ target 'RideWithPride' do
   pod 'Firebase/Database'
 
 pod 'GooglePlaces'
-pod 'GooglePlacePicker'
 pod 'GoogleMaps'
-
 
 
 

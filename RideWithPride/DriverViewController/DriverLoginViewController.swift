@@ -19,12 +19,6 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     var vc : UIViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Auth.auth().currentUser != nil {
-            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (timer) in
-                let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "NaviDr")
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
         emailtextfield.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         Passwordtextfield.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         

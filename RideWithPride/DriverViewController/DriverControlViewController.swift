@@ -15,6 +15,9 @@ import FirebaseAuth
 class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate,RiderDelegate {
     @IBOutlet weak var Directionbtn:UIButton!
     @IBOutlet weak var ShowRides:UIButton!
+    @IBOutlet weak var mapcc:UIView!
+    
+    @IBOutlet weak var text: UITextView!
     lazy var Driverlocation = CLLocationCoordinate2D()
     lazy var LocationManager = CLLocationManager()
     lazy var userlocation = CLLocation()
@@ -32,12 +35,18 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     override func viewDidLoad() {
         super.viewDidLoad()
         Directionbtn.isHidden = true
+        text.isHidden = true
+        text.layer.cornerRadius = 10
+        text.layer.masksToBounds = true
         self.view.isUserInteractionEnabled = true
         MapConstraints()
         setLoation()
         ridersRequests()
     }
     override func viewWillAppear(_ animated: Bool) {
+        Searchbarimplementation()
+        Directionbtn.layer.cornerRadius = 24
+        Directionbtn.layer.masksToBounds = true
         guard  let vc = Auth.auth().currentUser?.uid else {return}
         let current = Auth.auth().currentUser
         self.UID = vc
@@ -63,15 +72,19 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         map.isUserInteractionEnabled=true
         map.settings.scrollGestures=true
         map.settings.indoorPicker=true
+        map.settings.myLocationButton = true
         map.settings.compassButton=true
-        self.view.insertSubview(map, at: 0)
-        map.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
-        map.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
-        map.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
-        map.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
+        self.mapcc.insertSubview(map, at: 0)
+        mapcc.layer.cornerRadius = 25
+        mapcc.layer.masksToBounds = true
+        map.leftAnchor.constraint(equalTo: mapcc.leftAnchor).isActive=true
+        map.rightAnchor.constraint(equalTo: mapcc.rightAnchor).isActive=true
+        map.topAnchor.constraint(equalTo: mapcc.topAnchor).isActive=true
+        map.bottomAnchor.constraint(equalTo: mapcc.bottomAnchor).isActive=true
     }
     @IBAction func Directions(_ sender:UIButton){
-        DrawRoute(Driverlocation: Driverlocation, location: userlocation)
+        text.isHidden = false
+        ExtraThings.DrawRoutBetween(driverlocation: Driverlocation, userloaction: userlocation.coordinate, textviews: text, map: map)
     }
     @IBAction func Settings(_ sender:UIBarButtonItem){
         performSegue(withIdentifier: "sho", sender: UID)
@@ -164,20 +177,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         })
         self.userlocation = location
     }
-    private func DrawRoute(Driverlocation:CLLocationCoordinate2D,location:CLLocation){
-        print(Driverlocation)
-        print(location)
-                        let path = GMSMutablePath()
-                        path.add(Driverlocation)
-                        path.add(location.coordinate)
-                        let polyline = GMSPolyline(path: path)
-            polyline.map = nil
-        map.clear()
-                        polyline.strokeColor = .red
-                        polyline.strokeWidth = 8
-                        polyline.map = self.map
-        }
-    @IBAction func ShowRides(_ sender:UIButton){
+        @IBAction func ShowRides(_ sender:UIButton){
         if addressofRider == cityofDriver{
             let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "riders")as! CustompopViewController
             vc.delegate=self
@@ -192,4 +192,42 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         NotificationCenter.default.removeObserver(self)
     }
     
+}
+extension DriverControlViewController:UISearchBarDelegate,GMSAutocompleteViewControllerDelegate{
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        viewController.dismiss(animated: true) {
+            let camera = GMSCameraPosition.camera(withTarget: (place.coordinate), zoom: 18)
+            self.map.camera = camera
+            let marker = GMSMarker(position: place.coordinate)
+            marker.title = "\(place.name)"
+            marker.map = self.map
+        }
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func Searchbarimplementation(){
+        let searchController = UISearchController(searchResultsController:nil)
+        searchController.searchBar.placeholder = "Search Place"
+        searchController.searchBar.delegate = self
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.definesPresentationContext = true
+        
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        let auto = GMSAutocompleteViewController()
+        auto.delegate = self
+        self.present(auto, animated: true, completion: nil)
+    }
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        LocationManager.startUpdatingLocation()
+        return true
+    }
 }

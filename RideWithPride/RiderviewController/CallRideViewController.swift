@@ -16,9 +16,12 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     
     
     @IBOutlet weak var stack : UIStackView!
+    
+    @IBOutlet weak var textviews: UITextView!
     @IBOutlet weak var btn : UIButton!
     @IBOutlet weak var CancelRide : UIButton!
     @IBOutlet weak var la: UILabel!
+    @IBOutlet weak var mapviews: UIView!
     lazy var uid = String()
     @IBOutlet weak var nav : UINavigationBar!
     /// Mark: properties
@@ -30,27 +33,33 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     lazy var lat:CLLocationDegrees = CLLocationDegrees()
     lazy var log:CLLocationDegrees = CLLocationDegrees()
     lazy var Driverlocation = CLLocationCoordinate2D()
+    lazy var lat1 = CLLocationDegrees()
+    lazy var long2 = CLLocationDegrees()
     var isSelect : Bool?
     lazy var map:GMSMapView={
         var map = GMSMapView()
         map.isBuildingsEnabled = true
         map.isMyLocationEnabled = true
         map.settings.compassButton = true
+        map.settings.myLocationButton = true
         map.delegate = self
         map.translatesAutoresizingMaskIntoConstraints=false
         return map
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.insertSubview(map, at: 0)
+        Searchbarimplementation()
         btn.backgroundColor = UIColor(cgColor: CGColor.ColorCombination())
-        btn.layer.cornerRadius = 10
+        btn.layer.cornerRadius = 25
+        btn.layer.masksToBounds=true
         btn.setTitleColor(UIColor.white, for: .normal)
         CancelRide.layer.cornerRadius = 10
         CancelRide.backgroundColor = UIColor(cgColor: CGColor.ColorCombination())
         CancelRide.setTitleColor(UIColor.white, for: .normal)
-        CheckButtons()
+        //CheckButtons()
+        CancelRide.isHidden = true
+        textviews.isHidden = true
+        textviews.layer.cornerRadius = 20
         extractedFuncofconstraints()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +75,6 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
         }
         self.uid = ui
         setLoation()
-       CheckButtons()
         ExtraThings.ShowDriverDetail(snapshotUID: ui, ChildNode: "user") { [weak self](name) in
             DispatchQueue.main.async {
                 self?.title = name.uppercased()
@@ -96,7 +104,8 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
                         let alert = ExtraThings.ErrorAlertShow(Title: "Accept", Message: "Accept Your Request")
                         alert.addAction(UIAlertAction(title: "Next", style: .default, handler: { (action) in
                             
-                            self.drawroutebetween(driverLocation: driverlocation)
+                            ExtraThings.DrawRoutBetween(driverlocation: driverlocation, userloaction: self.userloaction!, textviews: self.textviews, map: self.map)
+                            self.btn.isHidden = true
                             snapshot.ref.removeValue()
                             Database.database().reference().child("loaction").removeAllObservers()
                         }))
@@ -109,23 +118,6 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
 
             }
         }
-    }
-    func drawroutebetween(driverLocation:CLLocationCoordinate2D){
-        let path = GMSMutablePath()
-        path.add(userloaction!)
-        path.add(driverLocation)
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeColor = .blue
-        polyline.strokeWidth = 15
-        polyline.map = self.map
-        let lodriver = CLLocation(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
-        let lorider = CLLocation(latitude: (userloaction?.latitude)!, longitude: (userloaction?.longitude)!)
-        let distance = lodriver.distance(from:lorider)/1000
-        let rounded = round(distance * 100) / 100
-        let makerr = GMSMarker()
-        makerr.position = driverLocation
-        makerr.snippet = "Your Driver is \(rounded) Km Away"
-        makerr.map = self.map
     }
     func setLoation(){
         LocationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -147,13 +139,9 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
         LocationManager.stopUpdatingLocation()
     }
     
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        //LocationManager.stopUpdatingLocation()
-    }
-    
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        //LocationManager.startUpdatingLocation()
         GETREQUEST()
+       
     }
     private func annotations(){
         map.clear()
@@ -176,21 +164,17 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     
     
     @IBAction func callaride(_ sender : UIButton){
-        guard let email = Auth.auth().currentUser?.email else {
-            print("Email is not found")
-            return}
+        if let email = Auth.auth().currentUser?.email  {
             let Values : [String:Any] = ["email":email,"lati":userloaction?.latitude ?? "","long":userloaction?.longitude ?? ""]
-            let ref = Database.database().reference().child("loaction").childByAutoId()
-            ref.setValue(Values)
-        UIView.animate(withDuration: 0.5) {
+             Database.database().reference().child("loaction").childByAutoId().setValue(Values)
             self.btn.isHidden=true
             self.CancelRide.isHidden=false
-            self.viewDidLayoutSubviews()
-        }
-        
         isSelect = true
         UserDefaults.standard.set(isSelect, forKey: "tr")
+        }else{
+            print("Email is not")
         }
+    }
     @IBAction func CancelRide(_ sender:UIButton){
         guard let email = Auth.auth().currentUser?.email else {return}
         Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
@@ -200,7 +184,6 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
         }
         self.btn.isHidden=false
         self.CancelRide.isHidden=true
-        
         isSelect=false
         UserDefaults.standard.set(isSelect, forKey: "tr")
 }

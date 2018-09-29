@@ -18,12 +18,7 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegates
-        if Auth.auth().currentUser != nil {
-            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (timer) in
-                let vc = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "NaviRide")
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
+       
         self.Passwordtextfield.delegate = self
         activity?.isHidden = true
         createbuttons.layer.cornerRadius = 15
@@ -38,7 +33,8 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
     
-        
+        createbuttons.layer.cornerRadius = 20
+        createbuttons.layer.masksToBounds = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -32,6 +32,7 @@
 		13C4DA9220F92AB600A1376F /* UItabelTableViewCellDR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4DA9120F92A6D00A1376F /* UItabelTableViewCellDR.swift */; };
 		13C4DA9420F92B7E00A1376F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4DA9320F92B7E00A1376F /* TableViewController.swift */; };
 		13D0D05A2102578800C812BD /* Rides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0D0592102578800C812BD /* Rides.swift */; };
+		13D8F32F215CE74300143A3A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D8F32E215CE74300143A3A /* File.swift */; };
 		13F7021120F5004B00D4BA23 /* logsa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F7021020F5004B00D4BA23 /* logsa.swift */; };
 		13F7021320F51F4800D4BA23 /* DriverLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F7021220F51F4800D4BA23 /* DriverLogin.storyboard */; };
 		13F7021520F51F6F00D4BA23 /* DriverLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F7021420F51F6F00D4BA23 /* DriverLoginViewController.swift */; };
@@ -79,6 +80,7 @@
 		13C4DA9120F92A6D00A1376F /* UItabelTableViewCellDR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UItabelTableViewCellDR.swift; sourceTree = "<group>"; };
 		13C4DA9320F92B7E00A1376F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		13D0D0592102578800C812BD /* Rides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rides.swift; sourceTree = "<group>"; };
+		13D8F32E215CE74300143A3A /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		13F7021020F5004B00D4BA23 /* logsa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logsa.swift; sourceTree = "<group>"; };
 		13F7021220F51F4800D4BA23 /* DriverLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverLogin.storyboard; sourceTree = "<group>"; };
 		13F7021420F51F6F00D4BA23 /* DriverLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverLoginViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				1378F7CD20EFB76400BE8E30 /* createAccountRiderView.swift */,
 				1373C0DB20F372890078E73A /* CallRideViewController.swift */,
 				13AAFA1E210231A9006FDE92 /* ExtenCallRideViewcontroller.swift */,
+				13D8F32E215CE74300143A3A /* File.swift */,
 			);
 			path = RiderviewController;
 			sourceTree = "<group>";
@@ -346,13 +349,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RideWithPride/Pods-RideWithPride-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +385,7 @@
 				13787AAF20FA18BF00E748A2 /* DriverControlViewController.swift in Sources */,
 				13D0D05A2102578800C812BD /* Rides.swift in Sources */,
 				1373C0DC20F372890078E73A /* CallRideViewController.swift in Sources */,
+				13D8F32F215CE74300143A3A /* File.swift in Sources */,
 				13BED2C920ED45830009C3E2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +527,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8TRWBBRCRY;
 				INFOPLIST_FILE = RideWithPride/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -545,6 +548,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8TRWBBRCRY;
 				INFOPLIST_FILE = RideWithPride/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
