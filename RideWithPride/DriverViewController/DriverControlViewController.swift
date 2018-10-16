@@ -45,7 +45,7 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
     }
     override func viewWillAppear(_ animated: Bool) {
         Searchbarimplementation()
-        Directionbtn.layer.cornerRadius = 24
+        Directionbtn.layer.cornerRadius = 20
         Directionbtn.layer.masksToBounds = true
         guard  let vc = Auth.auth().currentUser?.uid else {return}
         let current = Auth.auth().currentUser
@@ -82,9 +82,27 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         map.topAnchor.constraint(equalTo: mapcc.topAnchor).isActive=true
         map.bottomAnchor.constraint(equalTo: mapcc.bottomAnchor).isActive=true
     }
+    var isdri = true
     @IBAction func Directions(_ sender:UIButton){
         text.isHidden = false
-        ExtraThings.DrawRoutBetween(driverlocation: Driverlocation, userloaction: userlocation.coordinate, textviews: text, map: map)
+        if isdri{
+            ExtraThings.DrawRoutBetween(driverlocation: Driverlocation, userloaction: userlocation.coordinate, textviews: text, map: map)
+            Directionbtn.setTitle("Ride Completed", for: .normal)
+            isdri = false
+            
+        }else{
+            Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: emailofrider).observe(.childAdded) { (data) in
+                data.ref.removeValue()
+                Database.database().reference().child("loaction").removeAllObservers()
+            }
+            Directionbtn.setTitle("Driections", for: .normal)
+            isdri = true
+            Directionbtn.isHidden = true
+            self.ShowRides.isHidden = false
+            text.text = ""
+            text.isHidden = true
+        }
+        
     }
     @IBAction func Settings(_ sender:UIBarButtonItem){
         performSegue(withIdentifier: "sho", sender: UID)
@@ -131,7 +149,6 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         geocoder.reverseGeocodeCoordinate(Driverlocation) { response, error in
             guard let address = response?.firstResult() else {return}
             
-            // 3
             let marker = GMSMarker(position: address.coordinate)
             marker.title = address.country
             guard let city = address.locality else {return}
@@ -165,14 +182,16 @@ class DriverControlViewController: UIViewController,CLLocationManagerDelegate,GM
         }, DriverLocation: Driverlocation)
 
     }
-    func AcceptRide(_ email: String) {
-        UpdateRide(email: email, location: userlocation)
-        Directionbtn.isHidden = false
-        
+    lazy var emailofrider = String()
+    func AcceptRide(_ name: String, _ phone: String, _ email: String, _ dremail: String, vN0: String, vColor: String?) {
+        emailofrider = email
+        self.UpdateRide(email: dremail, location: self.userlocation,phone: phone,vN0,vColor!)
+        self.Directionbtn.isHidden = false
+        self.ShowRides.isHidden = true
     }
-    func UpdateRide(email:String,location:CLLocation){
-        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: { [weak self](DataSnapshot) in
-            DataSnapshot.ref.updateChildValues(["Drilati" : self?.Driverlocation.latitude ?? "No value","log":self?.Driverlocation.longitude ?? "Not logi"])
+    func UpdateRide(email:String,location:CLLocation,phone:String,_ vNo:String,_ vColor:String){
+        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: emailofrider).observe(.childAdded, with: { [weak self](DataSnapshot) in
+            DataSnapshot.ref.updateChildValues(["Drilati" : self?.Driverlocation.latitude ?? "No value","log":self?.Driverlocation.longitude ?? "Not logi","emailofdriver":email,"phoneno":phone,"vNo":vNo,"vColor":vColor])
             Database.database().reference().child("loaction").removeAllObservers()
         })
         self.userlocation = location

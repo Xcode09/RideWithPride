@@ -17,8 +17,17 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var ResetPassbuttons : UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Delegates
        
+        if UserDefaults.standard.bool(forKey: "issignin") == true{
+            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (time) in
+                self.activity.startAnimating()
+                let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "NaviRide")
+                self.present(callaride, animated: true, completion: {
+                    self.activity.stopAnimating()
+                })
+            }
+        }
+         // Delegates
         self.Passwordtextfield.delegate = self
         activity?.isHidden = true
         createbuttons.layer.cornerRadius = 15
@@ -27,8 +36,8 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
         logbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         //ResetPassbuttons.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         ResetPassbuttons.layer.cornerRadius = 10
-        emailtextfield.attributedPlaceholder =  NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        Passwordtextfield.attributedPlaceholder =  NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        emailtextfield.attributedPlaceholder =  NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        Passwordtextfield.attributedPlaceholder =  NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -79,8 +88,21 @@ class RiderViewController: UIViewController,UITextFieldDelegate {
                 // Navigate to Main RidePanel
                 let callaride = UIStoryboard(name: "CreateAccount", bundle: nil).instantiateViewController(withIdentifier: "NaviRide")
                 self.present(callaride, animated: true, completion: nil)
-            }else{
-                self.ErrorAlertShow(Title: "Error", Message:"Email is not verified")
+            }
+            else{
+                let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message:"Email is not verified")
+                alert.addAction(UIAlertAction(title: "Resend Email verification link", style: .default, handler: { (ac) in
+                    user?.sendEmailVerification(completion: { (error) in
+                        if error != nil {
+                            return
+                        }else {
+                            let alert = ExtraThings.ErrorAlertShow(Title: "Send", Message:"Email is Send")
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    })
+                }))
+                self.activity.isHidden=true
+                self.logbuttons.isHidden=false
             }
             
         }

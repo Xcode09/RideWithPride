@@ -20,6 +20,23 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app uses Loaction</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app uses your loaction</string>
+	<key>NSLocationUsageDescription</key>
+	<string>THis app uses loaction</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>app uses loaction</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Luminari.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -34,23 +51,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Luminari.ttf</string>
-	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app uses your loaction</string>
-	<key>NSLocationUsageDescription</key>
-	<string>THis app uses loaction</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app uses Loaction</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>app uses loaction</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -19,8 +19,16 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     var vc : UIViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailtextfield.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        Passwordtextfield.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        if Auth.auth().currentUser != nil {
+            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (time) in
+                let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "NaviDr")
+                self.present(vc, animated: true, completion: {
+                    DriverLoginViewController().dismiss(animated: true, completion: nil)
+                })
+            }
+        }
+        emailtextfield.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        Passwordtextfield.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         
         ViewDidLoadthings()
     }
@@ -34,7 +42,11 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
         Passwordtextfield.text = ""
     }
     @IBAction func resigter(_ sender:UIButton ){
-        self.dismiss(animated: true, completion: nil)
+        let vc = UIStoryboard(name: "DriverLogin", bundle: nil).instantiateViewController(withIdentifier: "re")
+        present(vc, animated: true) {
+            DriverLoginViewController().dismiss(animated: true, completion: nil)
+        }
+        
             
     }
     private func login(){
@@ -61,12 +73,17 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
                 self?.activity.stopAnimating()
                 self?.activity.isHidden = true
                 self?.logn.isHidden = false
-            }else if user?.isEmailVerified == true{
-                let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "NaviDr")
+            }else if user?.isEmailVerified==true{
                 self?.activity.stopAnimating()
                 self?.activity.isHidden = true
                 self?.logn.isHidden = false
-                self?.present(vc, animated: true)
+                Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (time) in
+                    let vc = UIStoryboard(name: "DriverControlPanel", bundle: nil).instantiateViewController(withIdentifier: "NaviDr")
+                    self?.present(vc, animated: true, completion: {
+                        DriverLoginViewController().dismiss(animated: true, completion: nil)
+                    })
+                    }
+                
             }else{
                 let alert = ExtraThings.ErrorAlertShow(Title: "Error", Message:"Email is not verified")
                 alert.addAction(UIAlertAction(title: "Resend Email verification link", style: .default, handler: { (ac) in
@@ -123,7 +140,7 @@ class DriverLoginViewController: UIViewController,UITextFieldDelegate {
     }
     fileprivate func ViewDidLoadthings() {
         self.Passwordtextfield.delegate = self
-         KeyboardManagement()
+         //ExtraThings.KeyboardManagement(self.view)
         activity?.isHidden = true
         logn.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         createbtin.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())

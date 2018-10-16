@@ -40,21 +40,23 @@ struct Riders{
         return rounded
     }
 }
-extension DriverLoginViewController{
- func KeyboardManagement(){
-        NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
-//            let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
-//            print(noti)
-            self.view.frame.origin.y = -78
 
-
-    }
-    NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (noti) in
-//        let user  = (noti.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
-        self.view.frame.origin.y = 0
+class AllCodesList{
+    typealias codes = ((_ Dictionary:NSDictionary)->Void)
+    static func AllCodes(compilation: @escaping codes){
         
-        
-    }
+        guard let st = Bundle.main.path(forResource: "File", ofType: "txt") else {return}
+        let url = URL(fileURLWithPath: st)
+        do{
+            let data = try Data(contentsOf: url)
+            guard let json = try JSONSerialization.jsonObject(with: data, options:.mutableContainers) as? [NSDictionary] else {return}
+            for js in json{
+                compilation(js)
+            }
+            
+        }catch let error{
+            print(error.localizedDescription)
+        }
     }
     
 }

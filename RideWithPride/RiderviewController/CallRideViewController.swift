@@ -15,15 +15,19 @@ import FirebaseDatabase
 class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapViewDelegate{
     
     
-    @IBOutlet weak var stack : UIStackView!
-    
+
+    @IBOutlet weak var callRideView:UIView!
+    @IBOutlet weak var onewaybtn : UIButton!
+    @IBOutlet weak var twowaybtn : UIButton!
+    @IBOutlet weak var closepop : UIButton!
     @IBOutlet weak var textviews: UITextView!
+    @IBOutlet weak var myclosebt:UIButton!
     @IBOutlet weak var btn : UIButton!
     @IBOutlet weak var CancelRide : UIButton!
-    @IBOutlet weak var la: UILabel!
     @IBOutlet weak var mapviews: UIView!
+    @IBOutlet weak var MakeCall:UIBarButtonItem!
     lazy var uid = String()
-    @IBOutlet weak var nav : UINavigationBar!
+    @IBOutlet weak var priceshow : UITextView!
     /// Mark: properties
     var userloaction : CLLocationCoordinate2D?
     lazy var LocationManager = CLLocationManager()
@@ -64,6 +68,8 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UserDefaults.standard.set(true, forKey: "issignin")
+        MakeCall.isEnabled = false
         let vc = Auth.auth().currentUser
         if vc != nil{
             
@@ -80,7 +86,7 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
                 self?.title = name.uppercased()
             }
         }
-        
+        GETREQUEST()
         
     }
     func CheckButtons(){
@@ -93,29 +99,46 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
             CancelRide.isHidden = true
         }
     }
-    
+    lazy var phone = String()
+    lazy var starttrip = false
     func GETREQUEST(){
         Database.database().reference().child("loaction").observe(.childAdded) { (snapshot) in
             if let snas = snapshot.value as? [String:Any]{
                 if let lati = snas["Drilati"] as? Double {
                     if let log = snas["log"] as? Double{
                         self.CancelRide.isHidden = true
-                        let driverlocation = CLLocationCoordinate2D(latitude: lati, longitude: log)
-                        let alert = ExtraThings.ErrorAlertShow(Title: "Accept", Message: "Accept Your Request")
+                        guard let phoneno = snas["phoneno"] as? String else{return}
+                        guard let vno = snas["vNo"] as? String else{return}
+                        self.phone = phoneno
+                        let driverlocation = CLLocation(latitude: lati, longitude: log)
+                        let alert = ExtraThings.ErrorAlertShow(Title: "Accept your Ride", Message: "Accept Your Request by Captain and Car No  is \(vno)")
                         alert.addAction(UIAlertAction(title: "Next", style: .default, handler: { (action) in
-                            
-                            ExtraThings.DrawRoutBetween(driverlocation: driverlocation, userloaction: self.userloaction!, textviews: self.textviews, map: self.map)
-                            self.btn.isHidden = true
+                            self.view.addSubview(self.textviews)
+                            self.textviews.frame = self.btn.frame
+                            self.textviews.frame.origin.x=self.btn.frame.origin.x
+                            self.textviews.frame.origin.y=self.btn.frame.origin.y
+                            let user = CLLocation(latitude: self.userloaction?.latitude ?? 0, longitude: self.userloaction?.longitude ?? 0)
+                            let distance =  driverlocation.distance(from: user)/1000
+                           
+                            let rounded = round(distance * 100) / 100
+                            OperationQueue.main.addOperation {
+                                self.textviews.isHidden = false
+                                self.textviews.text = "Your captain is \(rounded) KM Away and car no \(vno) "
+                                self.LocationManager.startUpdatingLocation()
+                                print(self.userloaction!)
+                            }
+                          
                             snapshot.ref.removeValue()
                             Database.database().reference().child("loaction").removeAllObservers()
                         }))
                         self.present(alert, animated: true, completion: nil)
-
+                        self.completebut()
+                        
                     }else{
                         self.CancelRide.isHidden = false
                     }
                 }
-
+                
             }
         }
     }
@@ -128,6 +151,7 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
         LocationManager.pausesLocationUpdatesAutomatically = false
         LocationManager.startUpdatingLocation()
     }
+    lazy var userstarttriploc = CLLocationCoordinate2D()
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locatio = locations.last else {return}
         let manager = locatio.coordinate
@@ -137,6 +161,22 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
         map.camera = region
         annotations()
         LocationManager.stopUpdatingLocation()
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading){
+        let location = manager.location
+        let rc = CLLocation(latitude: (self.userloaction?.latitude)!, longitude: self.userloaction!.longitude)
+        let distance = location?.distance(from: rc)
+        let rounded = round(distance ?? 0 * 100) / 100
+        let aa = Double(1)/Double(12)
+        let sss = Double(aa*rounded)
+        let price = sss * 95
+        let ddd = price + 120
+        self.view.insertSubview(priceshow, aboveSubview: mapviews)
+        self.priceshow.frame = self.mapviews.frame
+        self.priceshow.center = self.mapviews.center
+       
+        priceshow.text = "Your distance is \(Int(rounded)) \(Int(ddd))"
+        LocationManager.stopUpdatingHeading()
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
@@ -164,28 +204,50 @@ class CallRideViewController: UIViewController,CLLocationManagerDelegate,GMSMapV
     
     
     @IBAction func callaride(_ sender : UIButton){
-        if let email = Auth.auth().currentUser?.email  {
-            let Values : [String:Any] = ["email":email,"lati":userloaction?.latitude ?? "","long":userloaction?.longitude ?? ""]
-             Database.database().reference().child("loaction").childByAutoId().setValue(Values)
-            self.btn.isHidden=true
-            self.CancelRide.isHidden=false
-        isSelect = true
-        UserDefaults.standard.set(isSelect, forKey: "tr")
-        }else{
-            print("Email is not")
+       
+        callRideView.layer.cornerRadius  = 34
+        callRideView.layer.borderWidth = 2
+        callRideView.layer.borderColor = UIColor.blue.cgColor
+        callRideView.layer.masksToBounds = true
+        onewaybtn.layer.cornerRadius = 20
+        onewaybtn.layer.masksToBounds = true
+        twowaybtn.layer.cornerRadius = 20
+        twowaybtn.layer.masksToBounds = true
+        closepop.layer.cornerRadius = 10
+        closepop.layer.masksToBounds = true
+        self.view.insertSubview(callRideView, aboveSubview: mapviews)
+        self.callRideView.frame = self.mapviews.frame
+        self.callRideView.center = self.mapviews.center
+        callRideView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: 0.5) {
+            self.callRideView.transform = .identity
+            self.btn.isHidden = true
         }
+        
+        
+        
+
     }
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        GETREQUEST()
+    }
+    
     @IBAction func CancelRide(_ sender:UIButton){
-        guard let email = Auth.auth().currentUser?.email else {return}
-        Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
-            sanpshot.ref.removeValue()
-            Database.database().reference().child("loaction").removeAllObservers()
-            
-        }
-        self.btn.isHidden=false
-        self.CancelRide.isHidden=true
-        isSelect=false
-        UserDefaults.standard.set(isSelect, forKey: "tr")
+        let alert = ExtraThings.ErrorAlertShow(Title: "Cancel Ride", Message: "Are you sure to Cancel a Ride?")
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
+            guard let email = Auth.auth().currentUser?.email else {return}
+            Database.database().reference().child("loaction").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded) { (sanpshot) in
+                sanpshot.ref.removeValue()
+                Database.database().reference().child("loaction").removeAllObservers()
+                
+            }
+            self.btn.isHidden=false
+            self.CancelRide.isHidden=true
+            self.isSelect=false
+            UserDefaults.standard.set(self.isSelect, forKey: "tr")
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
 }
     @IBAction func show(_ sender:UIBarButtonItem){
         performSegue(withIdentifier: "show", sender: uid)

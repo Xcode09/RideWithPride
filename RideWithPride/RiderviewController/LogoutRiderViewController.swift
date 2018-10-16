@@ -160,28 +160,40 @@ class LogoutRiderViewController: UITableViewController{
     @IBAction func Logout(_ sender: UIButton) {
         let sheet = UIAlertController(title: "Logout", message: "Are you sure to logout", preferredStyle: .alert)
         sheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
-            do{
-                try Auth.auth().signOut()
-                let vc = UIStoryboard(name: "Rider1", bundle: nil).instantiateViewController(withIdentifier: "UIViewController-BYZ-38-t0r")
-                self.dismiss(animated: true) {
-                    self.present(vc, animated: true, completion: nil)
-                }
-            }catch{
-                
-            }
+            self.lof()
         }))
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(sheet, animated: true, completion: nil)
         
     }
+    func lof(){
+        do{
+            try Auth.auth().signOut()
+            UserDefaults.standard.set(false, forKey: "issignin")
+            let vc = UIStoryboard(name: "Rider1", bundle: nil).instantiateViewController(withIdentifier: "UIViewController-BYZ-38-t0r")
+            self.dismiss(animated: true) {
+                self.present(vc, animated: true, completion: nil)
+            }
+        }catch{
+            
+        }
+    }
     @IBAction func deletebtn(_ sender: UIButton) {
-        let sheet = UIAlertController(title: "Delete Account", message: "it will all your data are you sure", preferredStyle: .alert)
+        let sheet = UIAlertController(title: "Delete Account", message: "it will Delete all your data are you sure", preferredStyle: .alert)
         sheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
             Auth.auth().currentUser?.delete(completion: { (error) in
                 if error != nil{
                     print(error?.localizedDescription)
                 }else{
-//                    Database.database().reference().child("user").child(snapshotUID).ad
+                    Database.database().reference().child("user").child(self.snapshotUID).observe(.value, with: { (data) in
+                        data.ref.removeValue()
+                        Database.database().reference().child("user").child(self.snapshotUID).removeAllObservers()
+                        let del = UIAlertController(title: "Account Deleted", message: "Account is deleted successfully", preferredStyle: .actionSheet)
+                        del.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                            self.lof()
+                        }))
+                        self.present(del, animated: true, completion: nil)
+                    })
                 }
             })
         }))
@@ -196,8 +208,8 @@ class LogoutRiderViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.contentView.backgroundColor = .white
-            headerView.textLabel?.textColor = .black
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 25)
+            headerView.textLabel?.textColor = .gray
+            headerView.textLabel?.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         }
     }
 }

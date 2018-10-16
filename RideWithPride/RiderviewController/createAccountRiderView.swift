@@ -16,6 +16,7 @@ class createAccountRiderView: UIViewController {
     @IBOutlet weak var createbt : UIButton!
     // Mark : Regular Expression For email
     private let EmailRegex = "\\w+\\d?\\@\\w+\\.com"
+    private let nameregex = "\\w+"
     //Mark:Regular Expression for Password
     //private let passwordexp = "[A-Z0-9]{8}"
     
@@ -24,9 +25,9 @@ class createAccountRiderView: UIViewController {
         createbt.layer.cornerRadius = 8
         createbt.backgroundColor = UIColor(cgColor: CGColor.colorForbtn())
         Delegatesoftextfield()
-        Nametextfield.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        Emailtextfield.attributedPlaceholder = NSAttributedString(string: "xxxxx234@xmail.com", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        Passwordtextfield.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        Nametextfield.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        Emailtextfield.attributedPlaceholder = NSAttributedString(string: "xxxxx234@xmail.com", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        Passwordtextfield.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
     NotificationCenter.default.addObserver(forName:Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (noti) in
             self.view.frame.origin.y = -140
         
@@ -58,7 +59,8 @@ class createAccountRiderView: UIViewController {
         guard let email = Emailtextfield.text else{return}
         guard let pass = Passwordtextfield.text else {return}
         let emailtrue = createAccountRiderView.isEmailValide(EmailText: email, regularExp: EmailRegex)
-        if text != "" && emailtrue == true && pass.count >= 8{
+         let nametrue = createAccountRiderView.isEmailValide(EmailText: nameregex, regularExp: EmailRegex)
+        if text.count >= 3 && text != "" && emailtrue == true && pass.count >= 8 && nametrue==true{
             Auth.auth().createUser(withEmail: email, password: pass) { (user, error) in
                 if error != nil{
                     self.ErrorAlertShow(Title: "Error", Message: (error?.localizedDescription)!)
@@ -83,8 +85,8 @@ class createAccountRiderView: UIViewController {
             ErrorAlertShow(Title: "Email Wrong", Message: "Please Enter information according to the format in placeholder.")
         }else if pass.count < 8{
            ErrorAlertShow(Title: "Password Wrong", Message: "password must 8 charaters......")
-        }else if text == ""{
-            ErrorAlertShow(Title: "Name Field Empty", Message: "Please fill your name")
+        }else if text == "" || text.count < 3 || nametrue == false{
+            ErrorAlertShow(Title: "Name Field Eroor", Message: "Minimium 3 Characters or name contains only characters")
         }else{
             ErrorAlertShow(Title: "SomeThingWrong", Message: "OOPs")
         }

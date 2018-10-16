@@ -28,7 +28,7 @@ class ButtonX:UIButton{
     func update(){
         let layer = self.layer as! CAGradientLayer
         layer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        layer.endPoint = CGPoint(x: 1.0, y: 1.5)
+        layer.endPoint = CGPoint(x: 1.0, y: 1.1)
         layer.colors = [first.cgColor,second.cgColor]
         
     }

@@ -29,6 +29,7 @@ class DriverLogoutTableViewController: UITableViewController {
             self.versionlb.text = lb
         }
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,19 +45,18 @@ class DriverLogoutTableViewController: UITableViewController {
                 print(snap)
                 guard let name = snap["Name"] as? String else {return}
                 self?.Name = name
-                guard let Emailname = snap["email"] as? String else {return}
-                guard let Cnic = snap["Cnic"] as? String else {return}
-                guard let address = snap["address"] as? String else {return}
+                guard var Emailname = snap["email"] as? String else {return}
                 guard let phone = snap["phone"] as? String else {return}
                 guard let lati = snap["lati"] as? Double else {return}
                 guard let log = snap["log"] as? Double else {return}
-                self?.Cnic = Cnic
-                self?.address = address
                 self?.phone = phone
                 self?.lati = lati
                 self?.log  = log
-                
-                self?.NameLabel.text = self?.Name
+                if InternetCheck.Isinternetavailbe() == false {
+                    self?.Name = "Not internet Connection"
+                    Emailname = "Not internet Connection"
+                }
+                self?.NameLabel.text = self?.Name ?? "Not internet Connection"
                 self?.EmailAccount.text = Emailname
             }else{
                 print("Not Data")
@@ -207,11 +207,38 @@ class DriverLogoutTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.contentView.backgroundColor = .white
-            headerView.textLabel?.textColor = .black
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 25)
+            headerView.textLabel?.textColor = .gray
+            headerView.textLabel?.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         }
     }
     
-    
+    @IBAction func AccountDel(_ sender:UIButton){
+        let sheet = UIAlertController(title: "Delete Account", message: "it will Delete all your data are you sure", preferredStyle: .alert)
+        sheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
+            Auth.auth().currentUser?.delete(completion: { (error) in
+                if error != nil{
+                    print(error?.localizedDescription)
+                }else{
+                    Database.database().reference().child("DriverUser").child(self.snapshotUID).observe(.value, with: { (data) in
+                        data.ref.removeValue()
+                        Database.database().reference().child("DriverUser").child(self.snapshotUID).removeAllObservers()
+                        let del = UIAlertController(title: "Account Deleted", message: "Account is deleted successfully", preferredStyle: .actionSheet)
+                        del.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                            do{
+                                try Auth.auth().signOut()
+                                self.InitiateVC()
+                            }catch{
+                                
+                            }
+                        }))
+                        self.present(del, animated: true, completion: nil)
+                    })
+                }
+            })
+        }))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(sheet, animated: true, completion: nil)
+        
+    }
     
 }

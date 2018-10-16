@@ -9,7 +9,7 @@
 import UIKit
 
 class VDViewController: UIViewController {
-
+    @IBOutlet weak var bt:ButtonX!
     override func viewDidLoad() {
         let image = UIImageView().CreateImageView(Image: "2")
         super.viewDidLoad()
@@ -18,6 +18,7 @@ class VDViewController: UIViewController {
         image.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
         image.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
         image.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
+        bt.layer.cornerRadius = 26
     }
 
 }
